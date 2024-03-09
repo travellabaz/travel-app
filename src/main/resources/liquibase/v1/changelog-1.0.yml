@@ -1,0 +1,184 @@
+databaseChangeLog:
+  - changeSet:
+      id: db-initial
+      author: Elnur Shirmammadov
+      changes:
+        - createTable:
+            tableName: clients
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name_from
+                  type: varchar2(255)
+              - column:
+                  name: name_to
+                  type: varchar2(255)
+              - column:
+                  name: phone_from
+                  type: varchar2(32)
+                  constraints:
+                    unique: true
+              - column:
+                  name: phone_to
+                  type: varchar2(32)
+              - column:
+                  name: message
+                  type: text
+              - column:
+                  name: pin
+                  type: varchar2(32)
+              - column:
+                  name: mail
+                  type: varchar2(64)
+              - column:
+                  name: citizen_country
+                  type: varchar2(32)
+              - column:
+                  name: birth_date
+                  type: date
+              - column:
+                  name: message_sent_at
+                  type: timestamp
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+        - createTable:
+            tableName: offers
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: service_type
+                  type: varchar2(32)
+              - column:
+                  name: status
+                  type: varchar2(32)
+              - column:
+                  name: message_sent_at
+                  type: timestamp
+              - column:
+                  name: planned_date
+                  type: date
+              - column:
+                  name: trip_date
+                  type: timestamp
+              - column:
+                  name: purchase_date
+                  type: timestamp
+              - column:
+                  name: client_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_offer_to_client
+                    references: clients(id)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValue: now()
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValue: now()
+        - createTable:
+            tableName: countries
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar2(255)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValue: now()
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValue: now()
+        - createTable:
+            tableName: cities
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar2(255)
+              - column:
+                  name: country_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_countries_to_cities
+                    references: countries(id)
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValue: now()
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValue: now()
+        - createTable:
+            tableName: travel_offer_country
+            columns:
+              - column:
+                  name: offer_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: countries_offers_fkey
+                    references: offers(id)
+                    nullable: false
+              - column:
+                  name: country_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: offers_counties_fkey
+                    references: countries(id)
+                    nullable: false
+        - createTable:
+            tableName: travel_offer_city
+            columns:
+              - column:
+                  name: offer_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: cities_offers_fkey
+                    references: offers(id)
+                    nullable: false
+              - column:
+                  name: city_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: offers_cities_fkey
+                    references: cities(id)
+                    nullable: false

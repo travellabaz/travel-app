@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: ms.travel.application
+  cloud:
+    compatibility-verifier:
+      enabled: false
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: Be8OY0Y#595H
+    driverClassName: org.postgresql.Driver
+  liquibase:
+    change-log: liquibase/changelog-master.yml
+server:
+  port: 8081
+
+token:
+  key: SRrdxDWe8NGM-/0uQrB!RHLtT2cbczHeT633kq2E3mXn2XrJSx69Y1JNjITNiVt1
+
+url:
+  base:
+    soft-10: https://wp.soft10.az
