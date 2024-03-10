@@ -25,11 +25,11 @@ url:
   base:
     soft-10: https://wp.soft10.az
 
-#    ```properties
-#    spring_profiles_active=prod
-#    PROD_DB_HOST=monorail.proxy.rlwy.net
-#    PROD_DB_PORT=36158
-#    PROD_DB_NAME=railway
-#    PROD_DB_PASSWORD=pLawdhdDgbWtSPQioFXonUZpJAmFWNvH
-#    PROD_DB_USERNAME=postgres
-#    ```
+    ```properties
+    spring_profiles_active=prod
+    PROD_DB_HOST=monorail.proxy.rlwy.net
+    PROD_DB_PORT=36158
+    PROD_DB_NAME=railway
+    PROD_DB_PASSWORD=pLawdhdDgbWtSPQioFXonUZpJAmFWNvH
+    PROD_DB_USERNAME=postgres
+    ```
