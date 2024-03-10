@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: prod
+  application:
+    name: ms.travel.application
+  cloud:
+    compatibility-verifier:
+      enabled: false
+  jpa:
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://${PROD_DB_HOST}:${PROD_DB_PORT}/${PROD_DB_NAME}
+    username: ${PROD_DB_USERNAME}
+    password: ${PROD_DB_PASSWORD}
+    driverClassName: org.postgresql.Driver
+  liquibase:
+    change-log: liquibase/changelog-master.yml
+server:
+  port: 8081
+
+token:
+  key: SRrdxDWe8NGM-/0uQrB!RHLtT2cbczHeT633kq2E3mXn2XrJSx69Y1JNjITNiVt1
+
+url:
+  base:
+    soft-10: https://wp.soft10.az
+
+#    ```properties
+#    spring_profiles_active=prod
+#    PROD_DB_HOST=monorail.proxy.rlwy.net
+#    PROD_DB_PORT=36158
+#    PROD_DB_NAME=railway
+#    PROD_DB_PASSWORD=pLawdhdDgbWtSPQioFXonUZpJAmFWNvH
+#    PROD_DB_USERNAME=postgres
+#    ```
