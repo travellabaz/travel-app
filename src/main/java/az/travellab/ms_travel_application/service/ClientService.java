@@ -4,26 +4,21 @@ import az.travellab.ms_travel_application.annotation.Log;
 import az.travellab.ms_travel_application.dao.entity.ClientEntity;
 import az.travellab.ms_travel_application.dao.repository.ClientRepository;
 import az.travellab.ms_travel_application.dao.repository.OfferRepository;
-import az.travellab.ms_travel_application.factory.ClientCriteriaMapper;
-import az.travellab.ms_travel_application.model.dto.ClientCriteriaDto;
-import az.travellab.ms_travel_application.model.response.ClientResponse;
 import az.travellab.ms_travel_application.model.request.ClientRegistrationRequest;
 import az.travellab.ms_travel_application.model.request.ClientUpdateRequest;
+import az.travellab.ms_travel_application.model.response.ClientResponse;
 import az.travellab.ms_travel_application.model.response.PageableClientResponse;
 import az.travellab.ms_travel_application.service.specification.ClientSpecification;
-import az.travellab.ms_travel_application.util.HttpContextUtil;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.Optional;
 
-import static az.travellab.ms_travel_application.factory.ClientCriteriaMapper.*;
+import static az.travellab.ms_travel_application.factory.ClientCriteriaMapper.CLIENT_CRITERIA_MAPPER;
 import static az.travellab.ms_travel_application.factory.ClientMapper.CLIENT_MAPPER;
 import static az.travellab.ms_travel_application.factory.OfferMapper.OFFER_MAPPER;
-import static az.travellab.ms_travel_application.factory.PageableClientMapper.*;
-import static az.travellab.ms_travel_application.util.HttpContextUtil.*;
+import static az.travellab.ms_travel_application.factory.PageableClientMapper.PAGEABLE_CLIENT_MAPPER;
+import static az.travellab.ms_travel_application.util.HttpContextUtil.HTTP_CONTEXT_UTIL;
 import static az.travellab.ms_travel_application.util.PageUtil.PAGE_UTIL;
 
 @Log

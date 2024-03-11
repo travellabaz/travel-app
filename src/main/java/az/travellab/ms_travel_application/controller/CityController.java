@@ -4,7 +4,7 @@ import az.travellab.ms_travel_application.annotation.Api;
 import az.travellab.ms_travel_application.model.response.CityResponse;
 import az.travellab.ms_travel_application.service.CityService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 

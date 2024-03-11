@@ -1,14 +1,11 @@
 package az.travellab.ms_travel_application.factory;
 
 
-import az.travellab.ms_travel_application.dao.entity.CityEntity;
 import az.travellab.ms_travel_application.model.client.SendMessageRequest;
-import az.travellab.ms_travel_application.model.dto.CityDto;
-import az.travellab.ms_travel_application.model.enums.Employee;
 
 import java.util.List;
 
-import static az.travellab.ms_travel_application.model.enums.Employee.*;
+import static az.travellab.ms_travel_application.model.enums.Employee.getEmployeeByPhone;
 
 public enum MessageMapper {
     MESSAGE_MAPPER;

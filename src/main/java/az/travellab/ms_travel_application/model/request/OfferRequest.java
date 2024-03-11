@@ -17,5 +17,5 @@ public class OfferRequest {
     private LocalDate plannedDate;
     private LocalDateTime tripDate;
     private LocalDate purchaseDate;
-    private List<Long> countryIds;
+    private List<Long> citiesIds;
 }

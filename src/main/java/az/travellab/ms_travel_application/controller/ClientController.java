@@ -1,10 +1,9 @@
 package az.travellab.ms_travel_application.controller;
 
 import az.travellab.ms_travel_application.annotation.Api;
-import az.travellab.ms_travel_application.model.dto.ClientCriteriaDto;
-import az.travellab.ms_travel_application.model.response.ClientResponse;
 import az.travellab.ms_travel_application.model.request.ClientRegistrationRequest;
 import az.travellab.ms_travel_application.model.request.ClientUpdateRequest;
+import az.travellab.ms_travel_application.model.response.ClientResponse;
 import az.travellab.ms_travel_application.model.response.PageableClientResponse;
 import az.travellab.ms_travel_application.service.ClientService;
 import lombok.RequiredArgsConstructor;

@@ -7,8 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 import static az.travellab.ms_travel_application.factory.MessageMapper.MESSAGE_MAPPER;
 import static java.time.LocalDateTime.now;
 import static org.springframework.data.domain.PageRequest.of;

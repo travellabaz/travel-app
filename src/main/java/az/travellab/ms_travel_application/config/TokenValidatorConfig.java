@@ -1,7 +1,5 @@
 package az.travellab.ms_travel_application.config;
 
-import az.travellab.ms_travel_application.exception.CommonException;
-import az.travellab.ms_travel_application.exception.ErrorHandler;
 import az.travellab.ms_travel_application.exception.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
@@ -9,16 +7,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import net.javacrumbs.shedlock.core.LockProvider;
-import net.javacrumbs.shedlock.provider.jdbctemplate.JdbcTemplateLockProvider;
-import net.javacrumbs.shedlock.spring.annotation.EnableSchedulerLock;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 
 import static az.travellab.ms_travel_application.exception.ExceptionMessages.TOKEN_INVALID;

@@ -28,4 +28,10 @@ public class OfferController {
     public void offerInfoUpdate(@RequestBody OfferRequest offerRequest) {
         offerService.offerInfoUpdate(offerRequest);
     }
+
+    @PostMapping
+    @ResponseStatus(CREATED)
+    public void createOffer(@RequestBody OfferRequest offerRequest) {
+        offerService.createOffer(offerRequest);
+    }
 }

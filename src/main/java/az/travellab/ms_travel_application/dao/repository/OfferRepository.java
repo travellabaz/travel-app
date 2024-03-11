@@ -1,13 +1,10 @@
 package az.travellab.ms_travel_application.dao.repository;
 
-import az.travellab.ms_travel_application.dao.entity.ClientEntity;
 import az.travellab.ms_travel_application.dao.entity.OfferEntity;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -2,10 +2,9 @@ package az.travellab.ms_travel_application.factory;
 
 
 import az.travellab.ms_travel_application.dao.entity.ClientEntity;
-import az.travellab.ms_travel_application.model.response.ClientResponse;
-import az.travellab.ms_travel_application.model.enums.Employee;
 import az.travellab.ms_travel_application.model.request.ClientRegistrationRequest;
 import az.travellab.ms_travel_application.model.request.ClientUpdateRequest;
+import az.travellab.ms_travel_application.model.response.ClientResponse;
 
 import static az.travellab.ms_travel_application.model.constants.TravelApplicationConstants.AZE;
 import static az.travellab.ms_travel_application.model.enums.Employee.getEmployeeByPhone;

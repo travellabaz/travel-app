@@ -13,7 +13,7 @@ import java.util.List;
 import static az.travellab.ms_travel_application.factory.CountryMapper.COUNTRY_MAPPER;
 import static az.travellab.ms_travel_application.model.enums.OfferStatus.INTERESTED;
 import static az.travellab.ms_travel_application.model.enums.ServiceType.TOUR;
-import static java.time.LocalDateTime.*;
+import static java.time.LocalDateTime.now;
 import static java.util.Collections.emptyList;
 
 public enum OfferMapper {
@@ -65,5 +65,16 @@ public enum OfferMapper {
                         .build()
                 ).toList();
 
+    }
+
+    public OfferEntity generateOfferEntity(ClientEntity clientEntity, List<CityEntity> cityEntities) {
+        return OfferEntity.builder()
+                .client(clientEntity)
+                .countryEntityList(cityEntities.stream().map(CityEntity::getCountry).toList())
+                .cityEntityList(cityEntities)
+                .status(INTERESTED)
+                .serviceType(TOUR)
+                .messageSentAt(now())
+                .build();
     }
 }
