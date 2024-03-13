@@ -4,8 +4,6 @@ spring:
   cloud:
     compatibility-verifier:
       enabled: false
-  jpa:
-    show-sql: true
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: postgres
