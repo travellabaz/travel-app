@@ -67,14 +67,17 @@ public enum OfferMapper {
 
     }
 
-    public OfferEntity generateOfferEntity(ClientEntity clientEntity, List<CityEntity> cityEntities) {
+    public OfferEntity generateOfferEntity(ClientEntity clientEntity, List<CityEntity> cityEntities, OfferRequest offerRequest) {
         return OfferEntity.builder()
                 .client(clientEntity)
                 .countryEntityList(cityEntities.stream().map(CityEntity::getCountry).toList())
                 .cityEntityList(cityEntities)
-                .status(INTERESTED)
-                .serviceType(TOUR)
+                .status(offerRequest.getStatus())
+                .serviceType(offerRequest.getServiceType())
                 .messageSentAt(now())
+                .plannedDate(offerRequest.getPlannedDate())
+                .tripDate(offerRequest.getTripDate())
+                .purchaseDate(offerRequest.getPurchaseDate())
                 .build();
     }
 }

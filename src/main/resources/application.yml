@@ -12,7 +12,7 @@ spring:
   liquibase:
     change-log: liquibase/changelog-master.yml
 server:
-  port: 8081
+  port: 8082
 
 token:
   key: SRrdxDWe8NGM-/0uQrB!RHLtT2cbczHeT633kq2E3mXn2XrJSx69Y1JNjITNiVt1

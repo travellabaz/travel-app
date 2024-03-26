@@ -40,7 +40,8 @@ public class OfferService {
         var citiesEntity = cityService.getCitiesEntity(offerRequest.getCitiesIds());
         var offerEntity = OFFER_MAPPER.generateOfferEntity(
                 clientEntity,
-                citiesEntity
+                citiesEntity,
+                offerRequest
         );
         offerRepository.save(offerEntity);
     }

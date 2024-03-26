@@ -61,7 +61,7 @@ public class ClientService {
     }
 
     public void clientInfoUpdate(ClientUpdateRequest clientUpdateRequest) {
-        var client = prepareFindClientEntityByPhoneFrom(clientUpdateRequest.getPhoneFrom()).get();
+        var client = clientRepository.findById(clientUpdateRequest.getId()).get();
         CLIENT_MAPPER.updateClientEntity(clientUpdateRequest, client);
         prepareSaveOrUpdateClientEntity(client);
     }

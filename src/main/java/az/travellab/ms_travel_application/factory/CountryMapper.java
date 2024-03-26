@@ -19,7 +19,11 @@ public enum CountryMapper {
                 .map(countryName -> {
                     var cityDtos = cityEntities.stream()
                             .filter(cityEntity -> cityEntity.getCountry().getName().equals(countryName))
-                            .map(cityEntity -> CityDto.builder().name(cityEntity.getName()).build())
+                            .map(cityEntity -> CityDto.builder()
+                                    .id(cityEntity.getId())
+                                    .name(cityEntity.getName())
+                                    .build()
+                            )
                             .toList();
                     return CountryDto.builder()
                             .name(countryName)

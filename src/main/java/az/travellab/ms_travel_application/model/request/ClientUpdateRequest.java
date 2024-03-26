@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 @Data
 public class ClientUpdateRequest {
+    private Long id;
     private String nameFrom;
     private String phoneFrom;
     private String pin;
