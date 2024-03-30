@@ -13,7 +13,7 @@ public enum MessageMapper {
     public SendMessageRequest generateSendMessageRequest(List<String> sendPhones,String message,String phoneFrom) {
         var employee = getEmployeeByPhone(phoneFrom);
         return SendMessageRequest.builder()
-                .accessToken(employee.getAccessToken())
+//                .accessToken(employee.getAccessToken())
                 .message(message)
                 .numbers(sendPhones)
                 .userId(employee.getUserId())
