@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface Soft10Client {
 
     @PostMapping("send")
-    Object sendMessage(@RequestHeader String secretkey, @RequestBody SendMessageRequest qrDetailsRequest);
+    void sendMessage(@RequestHeader String secretkey, @RequestBody SendMessageRequest qrDetailsRequest);
 }

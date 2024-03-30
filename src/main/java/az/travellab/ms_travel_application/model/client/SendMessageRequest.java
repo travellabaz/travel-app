@@ -11,5 +11,4 @@ public class SendMessageRequest {
     private String userId;
     private String message;
     private List<String> numbers;
-//    private String accessToken;
 }
