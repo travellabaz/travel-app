@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: add gender type in client table
+      author: Elnur Shirmammadov
+      changes:
+        - addColumn:
+            tableName: clients
+            columns:
+              - column:
+                  name: gender_type
+                  type: VARCHAR(36)

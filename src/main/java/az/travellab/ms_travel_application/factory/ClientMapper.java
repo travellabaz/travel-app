@@ -14,7 +14,15 @@ public enum ClientMapper {
 
     public ClientEntity generateClientEntity(ClientRegistrationRequest clientRegistrationRequest) {
         var employee = getEmployeeByPhone(clientRegistrationRequest.getPhoneTo());
-        return ClientEntity.builder().message(clientRegistrationRequest.getMessage()).nameFrom(clientRegistrationRequest.getName()).phoneFrom(clientRegistrationRequest.getPhoneFrom()).phoneTo(employee.getPhone()).nameTo(employee.getName()).citizenCountry(AZE).build();
+        return ClientEntity
+                .builder()
+                .message(clientRegistrationRequest.getMessage())
+                .nameFrom(clientRegistrationRequest.getName())
+                .phoneFrom(clientRegistrationRequest.getPhoneFrom())
+                .phoneTo(employee.getPhone())
+                .nameTo(employee.getName())
+                .citizenCountry(AZE)
+                .build();
     }
 
     public void updateClientEntity(ClientUpdateRequest clientUpdateRequest, ClientEntity clientEntity) {
@@ -25,6 +33,8 @@ public enum ClientMapper {
         if (clientUpdateRequest.getCitizenCountry() != null)
             clientEntity.setCitizenCountry(clientUpdateRequest.getCitizenCountry());
         if (clientUpdateRequest.getPin() != null) clientEntity.setPin(clientUpdateRequest.getPin());
+        if (clientUpdateRequest.getGenderType() != null)
+            clientEntity.setGenderType(clientUpdateRequest.getGenderType());
     }
 
     public ClientResponse generateClientResponse(ClientEntity clientEntity) {

@@ -56,7 +56,7 @@ public class MessageService {
                                         messageRequest.getPhoneFrom()
                                 )
                         );
-                        sleep(10000);
+                        sleep(5000);
                     } catch (Exception exception) {
                         log.error("ActionLog.decode.error: ", exception);
                     }

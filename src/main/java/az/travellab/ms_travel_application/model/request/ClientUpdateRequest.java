@@ -1,5 +1,6 @@
 package az.travellab.ms_travel_application.model.request;
 
+import az.travellab.ms_travel_application.model.enums.GenderType;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ public class ClientUpdateRequest {
     private String phoneFrom;
     private String pin;
     private String mail;
+    private GenderType genderType;
     private String citizenCountry;
     private LocalDate birthDate;
 }

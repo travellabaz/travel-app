@@ -1,5 +1,7 @@
 package az.travellab.ms_travel_application.dao.entity;
 
+import az.travellab.ms_travel_application.model.enums.GenderType;
+import az.travellab.ms_travel_application.model.enums.ServiceType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,6 +14,7 @@ import java.util.Objects;
 
 import static jakarta.persistence.CascadeType.MERGE;
 import static jakarta.persistence.CascadeType.PERSIST;
+import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
@@ -40,6 +43,9 @@ public class ClientEntity {
     private String pin;
 
     private String mail;
+
+    @Enumerated(STRING)
+    private GenderType genderType;
 
     private String citizenCountry;
 
