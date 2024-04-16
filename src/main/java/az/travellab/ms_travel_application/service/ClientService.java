@@ -1,6 +1,5 @@
 package az.travellab.ms_travel_application.service;
 
-import az.travellab.ms_travel_application.annotation.Log;
 import az.travellab.ms_travel_application.dao.entity.ClientEntity;
 import az.travellab.ms_travel_application.dao.repository.ClientRepository;
 import az.travellab.ms_travel_application.dao.repository.OfferRepository;
@@ -21,7 +20,6 @@ import static az.travellab.ms_travel_application.factory.PageableClientMapper.PA
 import static az.travellab.ms_travel_application.util.HttpContextUtil.HTTP_CONTEXT_UTIL;
 import static az.travellab.ms_travel_application.util.PageUtil.PAGE_UTIL;
 
-@Log
 @Service
 @RequiredArgsConstructor
 public class ClientService {

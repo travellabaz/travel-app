@@ -1,8 +1,6 @@
 package az.travellab.ms_travel_application.service;
 
-import az.travellab.ms_travel_application.annotation.Log;
 import az.travellab.ms_travel_application.client.Soft10Client;
-import az.travellab.ms_travel_application.client.decoder.CustomErrorDecoder;
 import az.travellab.ms_travel_application.dao.repository.OfferRepository;
 import az.travellab.ms_travel_application.logger.TravelLabLogger;
 import az.travellab.ms_travel_application.model.enums.Employee;
@@ -12,15 +10,13 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static az.travellab.ms_travel_application.factory.MessageMapper.MESSAGE_MAPPER;
-import static java.lang.Thread.*;
+import static java.lang.Thread.sleep;
 import static java.time.LocalDateTime.now;
 import static org.springframework.data.domain.PageRequest.of;
 
 
-@Log
 @Service
 @RequiredArgsConstructor
 public class MessageService {
