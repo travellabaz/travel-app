@@ -34,7 +34,6 @@ public class OfferService {
         OFFER_MAPPER.updateOfferEntity(offerEntity, offerRequest, cityEntities);
         offerRepository.save(offerEntity);
     }
-
     public void createOffer(OfferRequest offerRequest) {
         var clientEntity = clientRepository.findById(offerRequest.getClientId()).get();
         var citiesEntity = cityService.getCitiesEntity(offerRequest.getCitiesIds());
