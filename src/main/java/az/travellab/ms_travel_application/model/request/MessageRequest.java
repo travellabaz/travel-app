@@ -12,4 +12,5 @@ public class MessageRequest {
     private String message;
     private Long cityId;
     private LocalDateTime checkDate;
+    private String fileUrl;
 }

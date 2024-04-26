@@ -1,5 +1,6 @@
 package az.travellab.ms_travel_application.model.response;
 
+import az.travellab.ms_travel_application.model.enums.GenderType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -18,6 +19,7 @@ public class ClientResponse {
     private String pin;
     private String mail;
     private String citizenCountry;
+    private GenderType genderType;
     private LocalDate birthDate;
     private LocalDateTime messageSentAt;
     private LocalDateTime createdAt;

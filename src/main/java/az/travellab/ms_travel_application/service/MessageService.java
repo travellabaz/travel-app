@@ -40,6 +40,7 @@ public class MessageService {
                     return offerEntity.getClient().getPhoneFrom();
                 }).toList());
 
+        var fileUrl = messageRequest.getFileUrl();
         phones.addAll(messageRequest.getPhones());
         phones.forEach(
                 phone -> {
@@ -49,7 +50,8 @@ public class MessageService {
                                 MESSAGE_MAPPER.generateSendMessageRequest(
                                         phone,
                                         messageRequest.getMessage(),
-                                        messageRequest.getPhoneFrom()
+                                        messageRequest.getPhoneFrom(),
+                                        fileUrl
                                 )
                         );
                         sleep(5000);

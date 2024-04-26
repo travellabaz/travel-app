@@ -51,6 +51,7 @@ public enum ClientMapper {
                 .phoneTo(clientEntity.getPhoneTo())
                 .messageSentAt(clientEntity.getMessageSentAt())
                 .createdAt(clientEntity.getCreatedAt())
+                .genderType(clientEntity.getGenderType())
                 .build();
     }
 }
