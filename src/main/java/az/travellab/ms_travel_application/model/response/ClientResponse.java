@@ -1,28 +1,27 @@
 package az.travellab.ms_travel_application.model.response;
 
-import az.travellab.ms_travel_application.model.enums.GenderType;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Data
 @Builder
+@AllArgsConstructor
 public class ClientResponse {
-    private Long id;
-    private String nameFrom;
+    private String id;
     private String nameTo;
-    private String phoneFrom;
     private String phoneTo;
+    private String nameFrom;
+    private String phoneFrom;
     private String message;
     private String pin;
     private String mail;
+    private String isMarried;
+    private String isParent;
+    private String username;
+    private String genderType;
     private String citizenCountry;
-    private GenderType genderType;
-    private Boolean isMarried;
-    private Boolean isParent;
-    private LocalDate birthDate;
-    private LocalDateTime messageSentAt;
-    private LocalDate createdAt;
+    private String birthDate;
+    private String createdAt;
+    private String messageSentAt;
 }

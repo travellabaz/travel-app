@@ -47,9 +47,9 @@ public enum ClientMapper {
 
     public ClientResponse generateClientResponse(ClientEntity clientEntity) {
         return ClientResponse.builder()
-                .id(clientEntity.getId())
+                .id(String.valueOf(clientEntity.getId()))
                 .mail(clientEntity.getMail())
-                .birthDate(clientEntity.getBirthDate())
+                .birthDate(String.valueOf(clientEntity.getBirthDate()))
                 .pin(clientEntity.getPin())
                 .citizenCountry(clientEntity.getCitizenCountry())
                 .message(clientEntity.getMessage())
@@ -57,11 +57,11 @@ public enum ClientMapper {
                 .nameTo(clientEntity.getNameTo())
                 .phoneFrom(clientEntity.getPhoneFrom())
                 .phoneTo(clientEntity.getPhoneTo())
-                .messageSentAt(clientEntity.getMessageSentAt())
-                .createdAt(LocalDate.from(clientEntity.getCreatedAt()))
-                .genderType(clientEntity.getGenderType())
-                .isMarried(clientEntity.getIsMarried())
-                .isParent(clientEntity.getIsParent())
+                .messageSentAt(String.valueOf(clientEntity.getMessageSentAt()))
+                .createdAt(String.valueOf(LocalDate.from(clientEntity.getCreatedAt())))
+                .genderType(String.valueOf(clientEntity.getGenderType()))
+                .isMarried(String.valueOf(clientEntity.getIsMarried()))
+                .isParent(String.valueOf(clientEntity.getIsParent()))
                 .build();
     }
 }

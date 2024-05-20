@@ -4,7 +4,7 @@ package az.travellab.ms_travel_application.factory;
 import az.travellab.ms_travel_application.model.client.SendMessageRequest;
 
 import static az.travellab.ms_travel_application.model.enums.Employee.getEmployeeByPhone;
-import static java.util.Collections.*;
+import static java.util.Collections.singletonList;
 
 public enum MessageMapper {
     MESSAGE_MAPPER;

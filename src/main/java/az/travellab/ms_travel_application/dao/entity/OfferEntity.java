@@ -4,6 +4,7 @@ import az.travellab.ms_travel_application.model.enums.OfferStatus;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -22,6 +23,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants
 @Table(name = "offers")
 public class OfferEntity {
 

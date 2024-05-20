@@ -9,15 +9,6 @@ import java.util.List;
 
 public enum CityMapper {
     CITY_MAPPER;
-
-    public List<CityDto> generateCitiesDto(List<CityEntity> cityEntities) {
-        return cityEntities.stream()
-                .map(city -> CityDto.builder()
-                        .name(city.getName())
-                        .build())
-                .toList();
-    }
-
     public List<CityResponse> generateCitiesResponse(List<CityEntity> cityEntities) {
         return cityEntities.stream()
                 .map(city -> CityResponse.builder()

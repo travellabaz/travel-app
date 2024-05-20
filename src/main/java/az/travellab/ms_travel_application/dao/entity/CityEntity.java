@@ -2,6 +2,7 @@ package az.travellab.ms_travel_application.dao.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,6 +14,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
 @Entity
+@FieldNameConstants
 @Table(name = "cities")
 public class CityEntity {
 

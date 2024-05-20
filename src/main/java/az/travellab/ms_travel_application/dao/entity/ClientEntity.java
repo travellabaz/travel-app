@@ -2,12 +2,11 @@ package az.travellab.ms_travel_application.dao.entity;
 
 import az.travellab.ms_travel_application.model.enums.Employee;
 import az.travellab.ms_travel_application.model.enums.GenderType;
-import az.travellab.ms_travel_application.model.enums.ServiceType;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,6 +23,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Builder
 @ToString
 @NoArgsConstructor
+@FieldNameConstants
 @AllArgsConstructor
 @Table(name = "clients")
 public class ClientEntity {
