@@ -22,7 +22,7 @@ public enum PageUtil {
                         s -> PageRequest.of(
                                 parseInt(s) - 1,
                                 parseInt(count.get()),
-                                Sort.by("createdAt")
+                                Sort.by("createdAt").descending()
                         )
                 )
                 .orElseGet(() -> PageRequest.of(0, 10));
