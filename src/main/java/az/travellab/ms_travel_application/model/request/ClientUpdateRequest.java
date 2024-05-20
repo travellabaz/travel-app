@@ -13,6 +13,8 @@ public class ClientUpdateRequest {
     private String pin;
     private String mail;
     private GenderType genderType;
+    private Boolean isMarried;
+    private Boolean isParent;
     private String citizenCountry;
     private LocalDate birthDate;
 }

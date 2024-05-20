@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: add isMarried and isParent in client table
+      author: Elnur Shirmammadov
+      changes:
+        - addColumn:
+            tableName: clients
+            columns:
+              - column:
+                  name: is_married
+                  type: BOOLEAN
+              - column:
+                  name: is_parent
+                  type: BOOLEAN

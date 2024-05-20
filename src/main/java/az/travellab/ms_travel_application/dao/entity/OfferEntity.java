@@ -62,6 +62,10 @@ public class OfferEntity {
 
     private LocalDate purchaseDate;
 
+    private LocalDateTime initialPaymentDate;
+
+    private LocalDateTime paymentDate;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 

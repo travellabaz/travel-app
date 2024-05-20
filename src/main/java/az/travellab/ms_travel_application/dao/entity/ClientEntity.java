@@ -44,6 +44,10 @@ public class ClientEntity {
 
     private String mail;
 
+    private Boolean isMarried;
+
+    private Boolean isParent;
+
     @Enumerated(STRING)
     private GenderType genderType;
 

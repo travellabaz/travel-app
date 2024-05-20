@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: add initialPaymentDate and paymentDate in client table
+      author: Elnur Shirmammadov
+      changes:
+        - addColumn:
+            tableName: offers
+            columns:
+              - column:
+                  name: initial_payment_date
+                  type: DATE
+              - column:
+                  name: payment_date
+                  type: DATE

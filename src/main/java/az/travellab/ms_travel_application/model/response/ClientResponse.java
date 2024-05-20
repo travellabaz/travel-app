@@ -20,7 +20,9 @@ public class ClientResponse {
     private String mail;
     private String citizenCountry;
     private GenderType genderType;
+    private Boolean isMarried;
+    private Boolean isParent;
     private LocalDate birthDate;
     private LocalDateTime messageSentAt;
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 }

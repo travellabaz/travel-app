@@ -41,6 +41,10 @@ public enum OfferMapper {
         if (offerUpdateRequest.getTripDate() != null) offerEntity.setTripDate(offerUpdateRequest.getTripDate());
         if (offerUpdateRequest.getPurchaseDate() != null)
             offerEntity.setPurchaseDate(offerUpdateRequest.getPurchaseDate());
+        if (offerUpdateRequest.getPaymentDate() != null)
+            offerEntity.setPaymentDate(offerUpdateRequest.getPaymentDate());
+        if (offerUpdateRequest.getInitialPaymentDate() != null)
+            offerEntity.setInitialPaymentDate(offerUpdateRequest.getInitialPaymentDate());
         var cityIds = offerEntity.getCityEntityList().stream().map(CityEntity::getId).toList();
         offerEntity.getCityEntityList().addAll(
                 cityEntities.stream()
@@ -78,6 +82,8 @@ public enum OfferMapper {
                 .plannedDate(offerRequest.getPlannedDate())
                 .tripDate(offerRequest.getTripDate())
                 .purchaseDate(offerRequest.getPurchaseDate())
+                .paymentDate(offerRequest.getPaymentDate())
+                .initialPaymentDate(offerRequest.getInitialPaymentDate())
                 .build();
     }
 }

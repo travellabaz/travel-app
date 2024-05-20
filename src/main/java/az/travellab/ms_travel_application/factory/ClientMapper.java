@@ -6,8 +6,11 @@ import az.travellab.ms_travel_application.model.request.ClientRegistrationReques
 import az.travellab.ms_travel_application.model.request.ClientUpdateRequest;
 import az.travellab.ms_travel_application.model.response.ClientResponse;
 
+import java.time.LocalDate;
+
 import static az.travellab.ms_travel_application.model.constants.TravelApplicationConstants.AZE;
 import static az.travellab.ms_travel_application.model.enums.Employee.getEmployeeByPhone;
+import static java.lang.Boolean.FALSE;
 
 public enum ClientMapper {
     CLIENT_MAPPER;
@@ -22,6 +25,8 @@ public enum ClientMapper {
                 .phoneTo(employee.getPhone())
                 .nameTo(employee.getName())
                 .citizenCountry(AZE)
+                .isMarried(FALSE)
+                .isParent(FALSE)
                 .build();
     }
 
@@ -35,6 +40,8 @@ public enum ClientMapper {
         if (clientUpdateRequest.getPin() != null) clientEntity.setPin(clientUpdateRequest.getPin());
         if (clientUpdateRequest.getGenderType() != null)
             clientEntity.setGenderType(clientUpdateRequest.getGenderType());
+        if (clientUpdateRequest.getIsMarried() != null) clientEntity.setIsMarried(clientUpdateRequest.getIsMarried());
+        if (clientUpdateRequest.getIsParent() != null) clientEntity.setIsMarried(clientUpdateRequest.getIsParent());
     }
 
     public ClientResponse generateClientResponse(ClientEntity clientEntity) {
@@ -50,8 +57,10 @@ public enum ClientMapper {
                 .phoneFrom(clientEntity.getPhoneFrom())
                 .phoneTo(clientEntity.getPhoneTo())
                 .messageSentAt(clientEntity.getMessageSentAt())
-                .createdAt(clientEntity.getCreatedAt())
+                .createdAt(LocalDate.from(clientEntity.getCreatedAt()))
                 .genderType(clientEntity.getGenderType())
+                .isMarried(clientEntity.getIsMarried())
+                .isParent(clientEntity.getIsParent())
                 .build();
     }
 }
