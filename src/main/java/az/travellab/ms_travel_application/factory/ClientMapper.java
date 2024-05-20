@@ -24,6 +24,7 @@ public enum ClientMapper {
                 .phoneFrom(clientRegistrationRequest.getPhoneFrom())
                 .phoneTo(employee.getPhone())
                 .nameTo(employee.getName())
+                .username(employee)
                 .citizenCountry(AZE)
                 .isMarried(FALSE)
                 .isParent(FALSE)
@@ -41,7 +42,7 @@ public enum ClientMapper {
         if (clientUpdateRequest.getGenderType() != null)
             clientEntity.setGenderType(clientUpdateRequest.getGenderType());
         if (clientUpdateRequest.getIsMarried() != null) clientEntity.setIsMarried(clientUpdateRequest.getIsMarried());
-        if (clientUpdateRequest.getIsParent() != null) clientEntity.setIsMarried(clientUpdateRequest.getIsParent());
+        if (clientUpdateRequest.getIsParent() != null) clientEntity.setIsParent(clientUpdateRequest.getIsParent());
     }
 
     public ClientResponse generateClientResponse(ClientEntity clientEntity) {

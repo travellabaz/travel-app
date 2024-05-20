@@ -30,6 +30,7 @@ public class ClientSpecification implements Specification<ClientEntity> {
                 .addNullSafety(clientCriteriaDto.getCitizenCountry(), citizenCountry -> cb.equal(root.get("citizenCountry"), citizenCountry))
                 .addNullSafety(clientCriteriaDto.getBirthDate(), birthDate -> cb.equal(root.get("birthDate"), birthDate))
                 .addNullSafety(clientCriteriaDto.getCreatedAt(), createdAt -> cb.equal(root.get("createdAt"), createdAt))
+                .addNullSafety(clientCriteriaDto.getUsername(), username -> cb.equal(root.get("username"), username))
                 .build();
         return cb.and(predicates);
     }

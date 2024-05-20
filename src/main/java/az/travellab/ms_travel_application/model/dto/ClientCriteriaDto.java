@@ -1,5 +1,6 @@
 package az.travellab.ms_travel_application.model.dto;
 
+import az.travellab.ms_travel_application.model.enums.Employee;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -16,6 +17,7 @@ public class ClientCriteriaDto {
     private String pin;
     private String mail;
     private String citizenCountry;
+    private Employee username;
     private LocalDate birthDate;
     private LocalDateTime createdAt;
 }

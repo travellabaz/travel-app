@@ -1,11 +1,13 @@
 package az.travellab.ms_travel_application.dao.entity;
 
+import az.travellab.ms_travel_application.model.enums.Employee;
 import az.travellab.ms_travel_application.model.enums.GenderType;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -47,6 +49,9 @@ public class ClientEntity {
     private Boolean isMarried;
 
     private Boolean isParent;
+
+    @Enumerated(STRING)
+    private Employee username;
 
     @Enumerated(STRING)
     private GenderType genderType;

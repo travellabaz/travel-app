@@ -11,7 +11,7 @@ import static java.util.Arrays.stream;
 public enum Employee {
     EMPLOYEE_1("994513433665", "Xeyale", "e50dafb992e030660a9dd87207fb4e99b8", "8"),
     EMPLOYEE_2("994514753665", "Afsana", "a82849063d96719c97c785b86f5f6789", "9"),
-    EMPLOYEE_E("994516413665", "Qumral", "e259acc19ede38f3c8a16b5a26941afd", "10"),
+    EMPLOYEE_3("994516413665", "Qumral", "e259acc19ede38f3c8a16b5a26941afd", "10"),
     EMPLOYEE_OTHER("others", "Others", "", "");
 
     @Setter
