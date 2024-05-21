@@ -54,7 +54,7 @@ public class MessageService {
                                         fileUrl
                                 )
                         );
-                        sleep(5000);
+                        sleep(12000);
                     } catch (Exception exception) {
                         log.error("ActionLog.decode.error: ", exception);
                     }
