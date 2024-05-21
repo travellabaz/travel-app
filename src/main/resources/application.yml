@@ -11,8 +11,6 @@ spring:
     driverClassName: org.postgresql.Driver
   liquibase:
     change-log: liquibase/changelog-master.yml
-  jpa:
-    show-sql: true
 server:
   port: 8082
 
