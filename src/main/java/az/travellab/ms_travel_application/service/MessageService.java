@@ -1,5 +1,6 @@
 package az.travellab.ms_travel_application.service;
 
+import az.travellab.ms_travel_application.annotation.Log;
 import az.travellab.ms_travel_application.client.Soft10Client;
 import az.travellab.ms_travel_application.dao.repository.OfferRepository;
 import az.travellab.ms_travel_application.logger.TravelLabLogger;
@@ -17,6 +18,7 @@ import static java.time.LocalDateTime.now;
 import static org.springframework.data.domain.PageRequest.of;
 
 
+@Log
 @Service
 @RequiredArgsConstructor
 public class MessageService {

@@ -26,8 +26,6 @@ public enum ClientMapper {
                 .nameTo(employee.getName())
                 .username(employee)
                 .citizenCountry(AZE)
-                .isMarried(FALSE)
-                .isParent(FALSE)
                 .build();
     }
 
