@@ -11,6 +11,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static az.travellab.ms_travel_application.factory.MessageMapper.MESSAGE_MAPPER;
 import static java.lang.Thread.sleep;
@@ -44,15 +45,20 @@ public class MessageService {
 
         var fileUrl = messageRequest.getFileUrl();
         phones.addAll(messageRequest.getPhones());
+        sendMessage(messageRequest.getPhoneFrom(), messageRequest.getMessage(), phones, fileUrl);
+        offerRepository.saveAll(offerEntities);
+    }
+
+    public void sendMessage(String phoneFrom, String message, List<String> phones, String fileUrl) {
         phones.forEach(
                 phone -> {
                     try {
                         soft10Client.sendMessage(
-                                Employee.getEmployeeByPhone(messageRequest.getPhoneFrom()).getAccessToken(),
+                                Employee.getEmployeeByPhone(phoneFrom).getAccessToken(),
                                 MESSAGE_MAPPER.generateSendMessageRequest(
                                         phone,
-                                        messageRequest.getMessage(),
-                                        messageRequest.getPhoneFrom(),
+                                        message,
+                                        phoneFrom,
                                         fileUrl
                                 )
                         );
@@ -62,7 +68,5 @@ public class MessageService {
                     }
                 }
         );
-
-        offerRepository.saveAll(offerEntities);
     }
 }

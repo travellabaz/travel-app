@@ -19,6 +19,7 @@ public class OfferResponse {
     private LocalDate plannedDate;
     private LocalDateTime messageSentAt;
     private LocalDateTime tripDate;
+    private LocalDateTime returnDate;
     private LocalDate purchaseDate;
     private LocalDateTime createdAt;
     private List<CountryDto> countries;

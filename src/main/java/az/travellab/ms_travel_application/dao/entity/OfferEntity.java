@@ -62,6 +62,8 @@ public class OfferEntity {
 
     private LocalDateTime tripDate;
 
+    private LocalDateTime returnDate;
+
     private LocalDate purchaseDate;
 
     private LocalDateTime initialPaymentDate;

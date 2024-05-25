@@ -16,6 +16,7 @@ public class OfferRequest {
     private OfferStatus status;
     private LocalDate plannedDate;
     private LocalDateTime tripDate;
+    private LocalDateTime returnDate;
     private LocalDate purchaseDate;
     private LocalDateTime paymentDate;
     private LocalDateTime initialPaymentDate;

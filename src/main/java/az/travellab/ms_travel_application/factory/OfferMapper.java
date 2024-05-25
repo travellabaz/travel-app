@@ -45,6 +45,8 @@ public enum OfferMapper {
             offerEntity.setPaymentDate(offerUpdateRequest.getPaymentDate());
         if (offerUpdateRequest.getInitialPaymentDate() != null)
             offerEntity.setInitialPaymentDate(offerUpdateRequest.getInitialPaymentDate());
+        if (offerUpdateRequest.getReturnDate() != null)
+            offerEntity.setReturnDate(offerUpdateRequest.getReturnDate());
         var cityIds = offerEntity.getCityEntityList().stream().map(CityEntity::getId).toList();
         offerEntity.getCityEntityList().addAll(
                 cityEntities.stream()
@@ -65,6 +67,7 @@ public enum OfferMapper {
                         .purchaseDate(offer.getPurchaseDate())
                         .createdAt(offer.getCreatedAt())
                         .messageSentAt(offer.getMessageSentAt())
+                        .returnDate(offer.getReturnDate())
                         .countries(COUNTRY_MAPPER.generateCountriesDto(offer.getCountryEntityList(), offer.getCityEntityList()))
                         .build()
                 ).toList();
@@ -83,6 +86,7 @@ public enum OfferMapper {
                 .tripDate(offerRequest.getTripDate())
                 .purchaseDate(offerRequest.getPurchaseDate())
                 .paymentDate(offerRequest.getPaymentDate())
+                .returnDate(offerRequest.getReturnDate())
                 .initialPaymentDate(offerRequest.getInitialPaymentDate())
                 .build();
     }

@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: add returnDate in offers table
+      author: Elnur Shirmammadov
+      changes:
+        - addColumn:
+            tableName: offers
+            columns:
+              - column:
+                  name: return_date
+                  type: DATE
