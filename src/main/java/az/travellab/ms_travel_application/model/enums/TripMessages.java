@@ -9,7 +9,7 @@ import static lombok.AccessLevel.PRIVATE;
 @Getter
 @RequiredArgsConstructor
 @FieldDefaults(level = PRIVATE, makeFinal = true)
-public enum TrimMessages {
+public enum TripMessages {
     REMINDER_TRIP_ONE_DAY_BEFORE("""
             Hörmətli %s,
                         
@@ -17,7 +17,7 @@ public enum TrimMessages {
                         
             Uçuş Məlumatları:
                         
-            Uçuş Vaxtı: [Uçuş Vaxtı]
+            Uçuş Vaxtı: %s
             Xahiş edirik, qeydiyyat və təhlükəsizlik prosedurları üçün uçuş vaxtından ən azı 3 saat əvvəl hava limanında olun.
                         
             Sizin rahatlığınız üçün əlavə məsləhətlər:
