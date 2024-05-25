@@ -10,7 +10,6 @@ import java.time.LocalDate;
 
 import static az.travellab.ms_travel_application.model.constants.TravelApplicationConstants.AZE;
 import static az.travellab.ms_travel_application.model.enums.Employee.getEmployeeByPhone;
-import static java.lang.Boolean.FALSE;
 
 public enum ClientMapper {
     CLIENT_MAPPER;

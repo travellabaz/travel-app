@@ -16,6 +16,14 @@ public enum DateUtil {
         return LocalDateTime.of(xmlGregorianCalendar.getYear(), xmlGregorianCalendar.getMonth(), xmlGregorianCalendar.getDay(), xmlGregorianCalendar.getHour(), xmlGregorianCalendar.getMinute(), xmlGregorianCalendar.getSecond());
     }
 
+    public LocalDateTime toStartOfDay() {
+        return LocalDateTime.now().toLocalDate().atStartOfDay();
+    }
+
+    public LocalDateTime toEndOfDay() {
+        return LocalDateTime.now().toLocalDate().atTime(23, 59, 59);
+    }
+
     public LocalDateTime toStartOfNextDay() {
         return LocalDateTime.now().plusDays(1).toLocalDate().atStartOfDay();
     }

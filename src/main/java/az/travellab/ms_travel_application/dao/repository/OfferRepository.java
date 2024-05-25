@@ -21,4 +21,14 @@ public interface OfferRepository extends JpaRepository<OfferEntity, Long>, JpaSp
     Optional<OfferEntity> findByClientIdAndId(Long clientId, Long id);
     @Query("SELECT o FROM OfferEntity o JOIN FETCH o.client WHERE o.tripDate BETWEEN :startDate AND :endDate AND o.status = :status AND o.serviceType IN :serviceTypes")
     List<OfferEntity> findByTripDateBetweenAndStatusAndServiceTypeIn(LocalDateTime startDate,LocalDateTime endDate, OfferStatus status, List<ServiceType> serviceTypes);
+
+    @Query("SELECT o FROM OfferEntity o JOIN FETCH o.client WHERE o.returnDate BETWEEN :startDate AND :endDate AND o.status = :status AND o.serviceType IN :serviceTypes")
+    List<OfferEntity> findByReturnDateBetweenAndStatusAndServiceTypeIn(LocalDateTime startDate,LocalDateTime endDate, OfferStatus status, List<ServiceType> serviceTypes);
+
+    @Query("SELECT o FROM OfferEntity o JOIN FETCH o.client WHERE o.initialPaymentDate BETWEEN :startDate AND :endDate AND o.status = :status AND o.serviceType IN :serviceTypes")
+    List<OfferEntity> findByInitialPaymentDateBetweenAndStatusAndServiceTypeIn(LocalDateTime startDate,LocalDateTime endDate, OfferStatus status, List<ServiceType> serviceTypes);
+
+    @Query("SELECT o FROM OfferEntity o JOIN FETCH o.client WHERE o.paymentDate BETWEEN :startDate AND :endDate AND o.status = :status AND o.serviceType IN :serviceTypes")
+    List<OfferEntity> findByPaymentDateBetweenAndStatusAndServiceTypeIn(LocalDateTime startDate,LocalDateTime endDate, OfferStatus status, List<ServiceType> serviceTypes);
+
 }

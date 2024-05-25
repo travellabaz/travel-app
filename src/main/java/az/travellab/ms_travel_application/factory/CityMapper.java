@@ -2,7 +2,6 @@ package az.travellab.ms_travel_application.factory;
 
 
 import az.travellab.ms_travel_application.dao.entity.CityEntity;
-import az.travellab.ms_travel_application.model.dto.CityDto;
 import az.travellab.ms_travel_application.model.response.CityResponse;
 
 import java.util.List;

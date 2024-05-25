@@ -2,14 +2,12 @@ package az.travellab.ms_travel_application.service;
 
 import az.travellab.ms_travel_application.dao.entity.CountryEntity;
 import az.travellab.ms_travel_application.dao.repository.CountryRepository;
-import az.travellab.ms_travel_application.factory.CountryMapper;
 import az.travellab.ms_travel_application.model.response.CountryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static az.travellab.ms_travel_application.factory.CityMapper.CITY_MAPPER;
 import static az.travellab.ms_travel_application.factory.CountryMapper.COUNTRY_MAPPER;
 import static az.travellab.ms_travel_application.util.CountryUtil.COUNTRY_UTIL;
 
