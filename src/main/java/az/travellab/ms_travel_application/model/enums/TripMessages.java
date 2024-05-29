@@ -8,180 +8,149 @@ import static lombok.AccessLevel.PRIVATE;
 
 @Getter
 @RequiredArgsConstructor
-@FieldDefaults(level = PRIVATE, makeFinal = true)
 public enum TripMessages {
     REMINDER_TRIP_ONE_DAY_BEFORE("""
             Hörmətli %s ☺️
-              
-              Ümid edirik ki, işlıriniz qaydasındır. Sabah planlaşdırılmış uçuşunuz haqqında sizə xatırlatma edir və Travellab komandası olaraq uğurlar arzu edirik  ✈️
-              
-              Uçuş Məlumatları 📜:
-              
-              
-              ⏰ Uçuş Vaxtı: %s
-              ⏰ Qayıtmaq Vaxtı: %s
-              
-              Xahiş edirik, qeydiyyat və təhlükəsizlik prosedurları üçün uçuş vaxtından ən azı 3 saat əvvəl hava limanında olun.
-              
-              Sizin rahatlığınız üçün əlavə məsləhətlər 🗒️:
-              
-              Səyahət Sənədləri:\s
-              
-              🪪 Pasportunuzu, vizanızı (əgər tələb olunursa) və digər lazım olan səyahət sənədlərinizi yanınızda saxlayın.
-              
-              
-              🧳 Bağaj: Bağaj limitinizi təsdiqləyin və buna uyğun qablaşdırma edin. Çantalarınıza əlaqə məlumatlarınızı yazmağı unutmayın.
-              
-              
-              Əgər hər hansı bir sualınız varsa və ya əlavə köməyə ehtiyacınız varsa, xahiş edirik bizimlə əlaqə saxlayın:\s
-              
-              Sizə xoş bir səyahət arzulayırıq!  🎫
-              
-              Hörmətlə,
-              
-              %s
-              Tur menecer
-              Travellab Group MMC
-              %s
-              travellab.az
+                        
+            Ümid edirik ki, işlıriniz qaydasındır. Sabah planlaşdırılmış uçuşunuz haqqında sizə xatırlatma edir və Travellab komandası olaraq uğurlar arzu edirik  ✈️
+                        
+            Uçuş Məlumatları 📜:
+                        
+                        
+            ⏰ Uçuş Vaxtı: %s
+            ⏰ Qayıtmaq Vaxtı: %s
+                        
+            Xahiş edirik, qeydiyyat və təhlükəsizlik prosedurları üçün uçuş vaxtından ən azı 3 saat əvvəl hava limanında olun.
+                        
+            Sizin rahatlığınız üçün əlavə məsləhətlər 🗒️:
+                        
+            Səyahət Sənədləri:\s
+                        
+            🪪 Pasportunuzu və digər lazım olan səyahət sənədlərinizi yanınızda saxlayın.
+                        
+                        
+            🧳 Bağaj: Bağaj limitinizi təsdiqləyin və buna uyğun qablaşdırma edin. Çantalarınıza əlaqə məlumatlarınızı yazmağı unutmayın.
+                        
+                        
+            Əgər hər hansı bir sualınız varsa və ya əlavə köməyə ehtiyacınız varsa, xahiş edirik bizimlə əlaqə saxlayın:\s
+                        
+            Sizə xoş bir səyahət arzulayırıq!  🎫
+                        
+            Hörmətlə,
+                        
+            %s
+            Tur menecer
+            Travellab Group MMC
+            %s
             """),
     REMINDER_TRIP_DAY("""
             Hörmətli %s ☺️
-              
-              Ümid edirik ki, işləriniz qaydasındadır. Bu günki uçuşunuz haqqında sizə xatırlatma edir və Travellab komandası olaraq uğurlar arzu edirik  ✈️
-              
-              Uçuş Məlumatları:
-              
-              ⏰ Uçuş Vaxtı: %s
-              
-              Xahiş edirik, qeydiyyat və təhlükəsizlik prosedurları üçün uçuş vaxtından ən azı [tövsiyə edilən saatlar] saat əvvəl hava limanında olun.
-              
-              Sizin rahatlığınız üçün əlavə məsləhətlər:
-              
-              Səyahət Sənədləri:\s
-              
-              🪪 Pasportunuzu və digər lazım olan səyahət sənədlərinizi yanınızda saxlayın.
-              
-            
-              🧳 Bağaj: Bağaj limitinizi təsdiqləyin və buna uyğun qablaşdırma edin. Çantalarınıza əlaqə məlumatlarınızı yazmağı unutmayın.
-              
-              
-              Əgər hər hansı bir sualınız varsa və ya əlavə köməyə ehtiyacınız varsa, xahiş edirik bizimlə əlaqə saxlayın.
-              
-              Sizə xoş bir səyahət arzulayırıq! 🎫
-              
-              Hörmətlə,
-              
-              %s
-              Tur menecer
-              Travellab Group MMC
-              %s
-              travellab.az
-            """),
-    REMINDER_RETURN_DAY("""
-            Hörmətli %s,
                         
-            Ümid edirik ki, işlıriniz qaydasındır. Sabah planlaşdırılmış uçuşunuz haqqında sizə xatırlatma edir və Travellab komandası olaraq uğurlar arzu edirik.
+            Ümid edirik ki, işləriniz qaydasındadır. Bu günki uçuşunuz haqqında sizə xatırlatma edir və Travellab komandası olaraq uğurlar arzu edirik  ✈️
                         
             Uçuş Məlumatları:
                         
-            Uçuş Vaxtı: %s
+            ⏰ Uçuş Vaxtı: %s
+            ⏰ Qayıtmaq Vaxtı: %s
+                        
             Xahiş edirik, qeydiyyat və təhlükəsizlik prosedurları üçün uçuş vaxtından ən azı 3 saat əvvəl hava limanında olun.
                         
             Sizin rahatlığınız üçün əlavə məsləhətlər:
                         
-            Səyahət Sənədləri: Pasportunuzu, vizanızı (əgər tələb olunursa) və digər lazım olan səyahət sənədlərinizi yanınızda saxlayın.
-            Bağaj: Bağaj limitinizi təsdiqləyin və buna uyğun qablaşdırma edin. Çantalarınıza əlaqə məlumatlarınızı yazmağı unutmayın.
-            Sağlamlıq və Təhlükəsizlik: Maska taxmaq və sosial məsafəni qorumaq kimi sağlamlıq və təhlükəsizlik qaydalarına əməl edin.
-            Əgər hər hansı bir sualınız varsa və ya əlavə köməyə ehtiyacınız varsa, xahiş edirik bizimlə əlaqə saxlayın: %s.
+            Səyahət Sənədləri:\s
                         
-            Sizə xoş bir səyahət arzulayırıq!
+            🪪 Pasportunuzu və digər lazım olan səyahət sənədlərinizi yanınızda saxlayın.
+                        
+                        
+            🧳 Bağaj: Bağaj limitinizi təsdiqləyin və buna uyğun qablaşdırma edin. Çantalarınıza əlaqə məlumatlarınızı yazmağı unutmayın.
+                        
+                        
+            Əgər hər hansı bir sualınız varsa və ya əlavə köməyə ehtiyacınız varsa, xahiş edirik bizimlə əlaqə saxlayın.
+                        
+            Sizə xoş bir səyahət arzulayırıq! 🎫
                         
             Hörmətlə,
                         
             %s
-            Tour Manager
-            Travellab MMC
+            Tur menecer
+            Travellab Group MMC
+            %s
+            """),
+    REMINDER_RETURN_DAY("""
+            Hörmətli %s ☺️
+                        
+            Ümid edirik ki, səyahətinizdən zövq aldınız. Sizə qayıdış uçuşunuz haqqında xatırlatma etmək və Travellab komandası olaraq sizə xoş bir geri dönüş arzulamaq istəyirik ✈️
+                        
+            Qayıdış Uçuş Məlumatları:
+                        
+            ⏰Uçuş Vaxtı: %s
+                        
+            Zəhmət olmasa, qeydiyyat və təhlükəsizlik prosedurları üçün uçuş vaxtından ən azı 3 saat əvvəl hava limanında olun.
+                        
+            Qayıdışınızın rahat keçməsi üçün bəzi tövsiyələr:
+                        
+            🪪 Səyahət Sənədləri: Pasportunuzu və digər lazım olan sənədlərinizi hazır saxlayın.
+            🧳 Bağaj: Bağaj limitinizi yoxlayın və çantalarınızı təhlükəsiz və rahat şəkildə qablaşdırın.
+                        
+                        
+            Əgər hər hansı bir sualınız varsa və ya əlavə köməyə ehtiyacınız varsa, bizimlə əlaqə saxlayın.
+            Sizə xoş bir qayıdış arzulayırıq! 🎫
+                        
+            Hörmətlə,
+                        
+            %s
+            Tur menecer
+            Travellab Group MMC
             %s
             """),
     INITIAL_PAYMENT_DAY("""
-            Hörmətli %s,
+            Hörmətli %s ☺️
                         
-            Ümid edirik ki, işlıriniz qaydasındır. Sabah planlaşdırılmış uçuşunuz haqqında sizə xatırlatma edir və Travellab komandası olaraq uğurlar arzu edirik.
+            Salam! Sizə bu mesajı göndəririk ki, ilkin ödəniş vaxtının çatdığını xatırladaq. Xahiş edirik, ümumi məbləğin 30 faizini ən qısa zamanda ödəyəsiniz. ✅
                         
-            Uçuş Məlumatları:
+            Sizin etibarınız bizim üçün çox vacibdir və sizinlə işləməkdən məmnuniyyət hissi duyuruq 😇
                         
-            Uçuş Vaxtı: %s
-            Xahiş edirik, qeydiyyat və təhlükəsizlik prosedurları üçün uçuş vaxtından ən azı 3 saat əvvəl hava limanında olun.
+            Əgər əlavə suallarınız və ya tələbləriniz varsa, zəhmət olmasa bizimlə əlaqə saxlayın. Sizə kömək etməkdən məmnun olarıq. ❓
                         
-            Sizin rahatlığınız üçün əlavə məsləhətlər:
-                        
-            Səyahət Sənədləri: Pasportunuzu, vizanızı (əgər tələb olunursa) və digər lazım olan səyahət sənədlərinizi yanınızda saxlayın.
-            Bağaj: Bağaj limitinizi təsdiqləyin və buna uyğun qablaşdırma edin. Çantalarınıza əlaqə məlumatlarınızı yazmağı unutmayın.
-            Sağlamlıq və Təhlükəsizlik: Maska taxmaq və sosial məsafəni qorumaq kimi sağlamlıq və təhlükəsizlik qaydalarına əməl edin.
-            Əgər hər hansı bir sualınız varsa və ya əlavə köməyə ehtiyacınız varsa, xahiş edirik bizimlə əlaqə saxlayın: %s.
-                        
-            Sizə xoş bir səyahət arzulayırıq!
+            Sizə uğurlar və xoş günlər arzulayırıq! 🎫
                         
             Hörmətlə,
                         
             %s
-            Tour Manager
-            Travellab MMC
+            Tur menecer
+            Travellab Group MMC
             %s
             """),
     PAYMENT_DAY("""
-            Hörmətli %s,
+            Sevgili %s ☺️
                         
-            Ümid edirik ki, işlıriniz qaydasındır. Sabah planlaşdırılmış uçuşunuz haqqında sizə xatırlatma edir və Travellab komandası olaraq uğurlar arzu edirik.
+            Öncəliklə, bizə olan etibarınız üçün minnətdarıq 😇
                         
-            Uçuş Məlumatları:
+            Xatırlatmaq istərdik ki, ümumi məbləğin 70 faizini təşkil edən qalıq ödənişiniz hələ tam ödənilməyib. Xahiş edirik, bu ödənişi ən qısa zamanda həyata keçirəsiniz. ✅
                         
-            Uçuş Vaxtı: %s
-            Xahiş edirik, qeydiyyat və təhlükəsizlik prosedurları üçün uçuş vaxtından ən azı 3 saat əvvəl hava limanında olun.
+            Lütfən, əlavə suallarınız olarsa, bizə çəkinmədən müraciət edin. Sizə kömək etməyimiz üçün buradayıq.
                         
-            Sizin rahatlığınız üçün əlavə məsləhətlər:
-                        
-            Səyahət Sənədləri: Pasportunuzu, vizanızı (əgər tələb olunursa) və digər lazım olan səyahət sənədlərinizi yanınızda saxlayın.
-            Bağaj: Bağaj limitinizi təsdiqləyin və buna uyğun qablaşdırma edin. Çantalarınıza əlaqə məlumatlarınızı yazmağı unutmayın.
-            Sağlamlıq və Təhlükəsizlik: Maska taxmaq və sosial məsafəni qorumaq kimi sağlamlıq və təhlükəsizlik qaydalarına əməl edin.
-            Əgər hər hansı bir sualınız varsa və ya əlavə köməyə ehtiyacınız varsa, xahiş edirik bizimlə əlaqə saxlayın: %s.
-                        
-            Sizə xoş bir səyahət arzulayırıq!
+            Sizə xoş günlər arzulayırıq 🎫
                         
             Hörmətlə,
                         
             %s
-            Tour Manager
-            Travellab MMC
+            Tur menecer
+            Travellab Group MMC
             %s
             """),
     BIRTH_DAY("""
-            Hörmətli %s,
+            Sevgili %s ☺️
+            
+            Ad gününüz mübarək olsun 🥳
                         
-            Ümid edirik ki, işlıriniz qaydasındır. Sabah planlaşdırılmış uçuşunuz haqqında sizə xatırlatma edir və Travellab komandası olaraq uğurlar arzu edirik.
+            Yeni yaşınız sizə səyahət etdiyiniz yerlərdəki qədər maraqlı və macəra dolu anlar gətirsin.\s
                         
-            Uçuş Məlumatları:
+            Həyatınızda yeni kəşflər və sevinclər bol olsun!
                         
-            Uçuş Vaxtı: %s
-            Xahiş edirik, qeydiyyat və təhlükəsizlik prosedurları üçün uçuş vaxtından ən azı 3 saat əvvəl hava limanında olun.
-                        
-            Sizin rahatlığınız üçün əlavə məsləhətlər:
-                        
-            Səyahət Sənədləri: Pasportunuzu, vizanızı (əgər tələb olunursa) və digər lazım olan səyahət sənədlərinizi yanınızda saxlayın.
-            Bağaj: Bağaj limitinizi təsdiqləyin və buna uyğun qablaşdırma edin. Çantalarınıza əlaqə məlumatlarınızı yazmağı unutmayın.
-            Sağlamlıq və Təhlükəsizlik: Maska taxmaq və sosial məsafəni qorumaq kimi sağlamlıq və təhlükəsizlik qaydalarına əməl edin.
-            Əgər hər hansı bir sualınız varsa və ya əlavə köməyə ehtiyacınız varsa, xahiş edirik bizimlə əlaqə saxlayın: %s.
-                        
-            Sizə xoş bir səyahət arzulayırıq!
-                        
-            Hörmətlə,
-                        
-            %s
-            Tour Manager
-            Travellab MMC
-            %s
+            Xoş arzularla,
+            Travellab Group MMC
             """);
 
-    String message;
+   private final String message;
 }

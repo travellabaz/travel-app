@@ -69,6 +69,7 @@ public class ClientNotificationService {
                     var managerPhone = client.getPhoneTo();
                     var message = REMINDER_TRIP_DAY.getMessage().formatted(
                             client.getNameFrom(),
+                            offer.getTripDate(),
                             offer.getReturnDate(),
                             client.getNameTo(),
                             client.getPhoneTo()
@@ -91,8 +92,7 @@ public class ClientNotificationService {
                     var managerPhone = client.getPhoneTo();
                     var message = REMINDER_RETURN_DAY.getMessage().formatted(
                             client.getNameFrom(),
-                            offer.getTripDate(),
-                            client.getNameTo(),
+                            offer.getReturnDate(),
                             client.getNameTo(),
                             client.getPhoneTo()
                     );
@@ -114,8 +114,6 @@ public class ClientNotificationService {
                     var managerPhone = client.getPhoneTo();
                     var message = INITIAL_PAYMENT_DAY.getMessage().formatted(
                             client.getNameFrom(),
-                            offer.getTripDate(),
-                            client.getNameTo(),
                             client.getNameTo(),
                             client.getPhoneTo()
                     );
@@ -137,8 +135,6 @@ public class ClientNotificationService {
                     var managerPhone = client.getPhoneTo();
                     var message = PAYMENT_DAY.getMessage().formatted(
                             client.getNameFrom(),
-                            offer.getTripDate(),
-                            client.getNameTo(),
                             client.getNameTo(),
                             client.getPhoneTo()
                     );
