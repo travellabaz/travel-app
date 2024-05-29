@@ -1,11 +1,12 @@
 package az.travellab.ms_travel_application.service;
 
 import az.travellab.ms_travel_application.dao.entity.ClientEntity;
+import az.travellab.ms_travel_application.dao.repository.ClientRepository;
 import az.travellab.ms_travel_application.dao.repository.OfferRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import static az.travellab.ms_travel_application.model.enums.OfferStatus.BOUGHT;
@@ -13,6 +14,7 @@ import static az.travellab.ms_travel_application.model.enums.ServiceType.AIR_TIC
 import static az.travellab.ms_travel_application.model.enums.ServiceType.TOUR;
 import static az.travellab.ms_travel_application.model.enums.TripMessages.*;
 import static az.travellab.ms_travel_application.util.DateUtil.DATE_UTIL;
+import static java.time.LocalDate.*;
 import static java.util.Collections.singletonList;
 
 @Service
@@ -21,29 +23,29 @@ public class ClientNotificationService {
 
     private final MessageService messageService;
     private final OfferRepository offerRepository;
+    private final ClientRepository clientRepository;
 
     public void sendTripReminderOneDayBefore() {
-        System.out.println(LocalDateTime.now());
-//        var offers = offerRepository.findByTripDateBetweenAndStatusAndServiceTypeIn(
-//                DATE_UTIL.toStartOfNextDay(), DATE_UTIL.toEndOfNextDay(), BOUGHT, List.of(AIR_TICKET, TOUR)
-//        );
-//
-//        if (offers.isEmpty()) return;
-//
-//        offers.forEach(
-//                offer -> {
-//                    var client = offer.getClient();
-//                    var managerPhone = client.getPhoneTo();
-//                    var message = REMINDER_TRIP_ONE_DAY_BEFORE.getMessage().formatted(
-//                            client.getNameFrom(),
-//                            offer.getTripDate(),
-//                            client.getNameTo(),
-//                            client.getNameTo(),
-//                            client.getPhoneTo()
-//                    );
-//                    prepareSendMessage(managerPhone, message, client);
-//                }
-//        );
+        var offers = offerRepository.findByTripDateBetweenAndStatusAndServiceTypeIn(
+                DATE_UTIL.toStartOfNextDay(), DATE_UTIL.toEndOfNextDay(), BOUGHT, List.of(AIR_TICKET, TOUR)
+        );
+
+        if (offers.isEmpty()) return;
+
+        offers.forEach(
+                offer -> {
+                    var client = offer.getClient();
+                    var managerPhone = client.getPhoneTo();
+                    var message = REMINDER_TRIP_ONE_DAY_BEFORE.getMessage().formatted(
+                            client.getNameFrom(),
+                            offer.getTripDate(),
+                            offer.getReturnDate(),
+                            client.getNameTo(),
+                            client.getPhoneTo()
+                    );
+                    prepareSendMessage(managerPhone, message, client);
+                }
+        );
     }
 
     private void prepareSendMessage(String managerPhone, String message, ClientEntity client) {
@@ -67,8 +69,7 @@ public class ClientNotificationService {
                     var managerPhone = client.getPhoneTo();
                     var message = REMINDER_TRIP_DAY.getMessage().formatted(
                             client.getNameFrom(),
-                            offer.getTripDate(),
-                            client.getNameTo(),
+                            offer.getReturnDate(),
                             client.getNameTo(),
                             client.getPhoneTo()
                     );
@@ -142,6 +143,24 @@ public class ClientNotificationService {
                             client.getPhoneTo()
                     );
                     prepareSendMessage(managerPhone, message, client);
+                }
+        );
+    }
+
+    public void sendBirthdayGreetings() {
+        var today = now();
+        var clients = clientRepository.findClientEntityByBirthMonthAndDay(today.getMonthValue(),today.getDayOfMonth());
+
+        if (clients.isEmpty()) return;
+
+        clients.forEach(
+                client -> {
+                    var message = BIRTH_DAY.getMessage().formatted(
+                            client.getNameFrom(),
+                            client.getNameTo(),
+                            client.getPhoneTo()
+                    );
+                    prepareSendMessage(client.getPhoneTo(), message, client);
                 }
         );
     }

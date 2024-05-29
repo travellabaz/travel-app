@@ -13,13 +13,13 @@ public class NotificationScheduler {
 
     private final ClientNotificationService clientNotificationService;
 
-    @Async
-//    @Scheduled(fixedRateString = "PT15M")
-    @Scheduled(cron = "0 0 15 * * *")
-    @SchedulerLock(name = "sendTripReminderOneDayBefore", lockAtLeastFor = "PT1M", lockAtMostFor = "PT5M")
-    public void sendTripReminderOneDayBefore() {
-        clientNotificationService.sendTripReminderOneDayBefore();
-    }
+//    @Async
+////    @Scheduled(fixedRateString = "PT15M")
+//    @Scheduled(cron = "0 0 15 * * *")
+//    @SchedulerLock(name = "sendTripReminderOneDayBefore", lockAtLeastFor = "PT1M", lockAtMostFor = "PT5M")
+//    public void sendTripReminderOneDayBefore() {
+//        clientNotificationService.sendTripReminderOneDayBefore();
+//    }
 
 //    @Async
 //    @Scheduled(cron = "0 0 8 * * *")
@@ -45,5 +45,12 @@ public class NotificationScheduler {
 //    @SchedulerLock(name = "paymentDateReminder", lockAtLeastFor = "PT1M", lockAtMostFor = "PT5M")
 //    public void paymentDateReminder() {
 //        clientNotificationService.paymentDateReminder();
+//    }
+
+//    @Async
+//    @Scheduled(fixedRateString = "PT15M")
+//    @SchedulerLock(name = "sendBirthdayGreetings", lockAtLeastFor = "PT1M", lockAtMostFor = "PT5M")
+//    public void sendBirthdayGreetings() {
+//        clientNotificationService.sendBirthdayGreetings();
 //    }
 }

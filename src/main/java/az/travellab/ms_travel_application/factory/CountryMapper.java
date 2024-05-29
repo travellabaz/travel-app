@@ -21,7 +21,10 @@ public enum CountryMapper {
     }
 
     public List<CountryDto> generateCountriesDto(List<CountryEntity> countryEntities, List<CityEntity> cityEntities) {
-        countryEntities.addAll(cityEntities.stream().map(CityEntity::getCountry).toList());
+        countryEntities.addAll(cityEntities.stream()
+                .map(CityEntity::getCountry)
+                .toList());
+        
         return countryEntities.stream()
                 .map(CountryEntity::getName)
                 .distinct()

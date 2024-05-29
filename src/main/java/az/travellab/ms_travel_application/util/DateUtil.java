@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -19,7 +20,6 @@ public enum DateUtil {
     public LocalDateTime toStartOfDay() {
         return LocalDateTime.now().toLocalDate().atStartOfDay();
     }
-
     public LocalDateTime toEndOfDay() {
         return LocalDateTime.now().toLocalDate().atTime(23, 59, 59);
     }
