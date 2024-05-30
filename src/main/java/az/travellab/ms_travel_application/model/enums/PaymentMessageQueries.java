@@ -49,7 +49,7 @@ public enum PaymentMessageQueries {
                                gender_type,
                                citizen_country,
                                birth_date,
-                               to_char(created_at, 'YYYY-MM-DD HH24:MI:SS'),
+                               to_char(created_at + interval '4 hours', 'YYYY-MM-DD HH24:MI:SS'),
                                message_sent_at,
                                service_type,
                                status,
