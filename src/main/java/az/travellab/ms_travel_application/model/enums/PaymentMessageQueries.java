@@ -8,7 +8,6 @@ import static lombok.AccessLevel.PRIVATE;
 
 @Getter
 @RequiredArgsConstructor
-@FieldDefaults(level = PRIVATE, makeFinal = true)
 public enum PaymentMessageQueries {
     GET_ALL_CLIENTS("""
             WITH clients_offers AS (SELECT cl.id,
@@ -90,6 +89,6 @@ public enum PaymentMessageQueries {
                         WHERE rn = 1
             """," ORDER BY created_at DESC");
 
-    String baseQuery;
-    String endOfQuery;
+   private final String baseQuery;
+   private final String endOfQuery;
 }
