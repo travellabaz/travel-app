@@ -21,6 +21,8 @@ public class OfferResponse {
     private LocalDateTime tripDate;
     private LocalDateTime returnDate;
     private LocalDate purchaseDate;
+    private LocalDateTime initialPaymentDate;
+    private LocalDateTime paymentDate;
     private LocalDateTime createdAt;
     private List<CountryDto> countries;
 }

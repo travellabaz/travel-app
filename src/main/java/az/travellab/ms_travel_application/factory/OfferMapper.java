@@ -68,6 +68,8 @@ public enum OfferMapper {
                         .createdAt(offer.getCreatedAt())
                         .messageSentAt(offer.getMessageSentAt())
                         .returnDate(offer.getReturnDate())
+                        .paymentDate(offer.getPaymentDate())
+                        .initialPaymentDate(offer.getInitialPaymentDate())
                         .countries(COUNTRY_MAPPER.generateCountriesDto(offer.getCountryEntityList(), offer.getCityEntityList()))
                         .build()
                 ).toList();
