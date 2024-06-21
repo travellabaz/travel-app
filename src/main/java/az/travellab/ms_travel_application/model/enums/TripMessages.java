@@ -2,9 +2,6 @@ package az.travellab.ms_travel_application.model.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-
-import static lombok.AccessLevel.PRIVATE;
 
 @Getter
 @RequiredArgsConstructor

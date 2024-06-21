@@ -14,13 +14,13 @@ public enum PageUtil {
     PAGE_UTIL;
 
     public Pageable getPageRequest() {
-            var page = HTTP_CONTEXT_UTIL.getParamValueByName("page");
-            var size = HTTP_CONTEXT_UTIL.getParamValueByName("count");
+        var page = HTTP_CONTEXT_UTIL.getParamValueByName("page");
+        var size = HTTP_CONTEXT_UTIL.getParamValueByName("count");
 
-            if (page.isPresent()) {
-                var intSize = size.map(Integer::parseInt).orElse(10);
-                return PageRequest.of(parseInt(page.get()) - 1, intSize);
-            }
-            return PageRequest.of(0, 10);
+        if (page.isPresent()) {
+            var intSize = size.map(Integer::parseInt).orElse(10);
+            return PageRequest.of(parseInt(page.get()) - 1, intSize);
         }
+        return PageRequest.of(0, 10);
+    }
 }

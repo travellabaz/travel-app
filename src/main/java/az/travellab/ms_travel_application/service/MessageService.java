@@ -10,13 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static az.travellab.ms_travel_application.factory.MessageMapper.MESSAGE_MAPPER;
 import static java.lang.Thread.sleep;
-import static java.time.LocalDateTime.now;
-import static org.springframework.data.domain.PageRequest.of;
 
 
 @Log
@@ -30,23 +27,23 @@ public class MessageService {
 
     @Async
     public void sendMessage(MessageRequest messageRequest) {
-        var offerEntities = offerRepository.findDistinctByCityEntityListIdAndMessageSentAtBefore(
-                messageRequest.getCityId(),
-                messageRequest.getCheckDate(),
-                of(0, 100)
-        );
-        var messageSentAt = now();
-
-        var phones = new ArrayList<>(offerEntities.stream()
-                .map(offerEntity -> {
-                    offerEntity.setMessageSentAt(messageSentAt);
-                    return offerEntity.getClient().getPhoneFrom();
-                }).toList());
-
-        var fileUrl = messageRequest.getFileUrl();
-        phones.addAll(messageRequest.getPhones());
-        sendMessage(messageRequest.getPhoneFrom(), messageRequest.getMessage(), phones, fileUrl);
-        offerRepository.saveAll(offerEntities);
+//        var offerEntities = offerRepository.findDistinctByCityEntityListIdAndMessageSentAtBefore(
+//                messageRequest.getCityId(),
+//                messageRequest.getCheckDate(),
+//                of(0, 100)
+//        );
+//        var messageSentAt = now();
+//
+//        var phones = new ArrayList<>(offerEntities.stream()
+//                .map(offerEntity -> {
+//                    offerEntity.setMessageSentAt(messageSentAt);
+//                    return offerEntity.getClient().getPhoneFrom();
+//                }).toList());
+//
+//        var fileUrl = messageRequest.getFileUrl();
+//        phones.addAll(messageRequest.getPhones());
+        sendMessage(messageRequest.getPhoneFrom(), messageRequest.getMessage(), messageRequest.getPhones(), messageRequest.getFileUrl());
+//        offerRepository.saveAll(offerEntities);
     }
 
     public void sendMessage(String phoneFrom, String message, List<String> phones, String fileUrl) {
