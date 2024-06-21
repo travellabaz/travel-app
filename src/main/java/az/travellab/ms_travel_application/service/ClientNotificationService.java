@@ -6,7 +6,6 @@ import az.travellab.ms_travel_application.dao.repository.OfferRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static az.travellab.ms_travel_application.model.enums.OfferStatus.BOUGHT;
@@ -14,7 +13,7 @@ import static az.travellab.ms_travel_application.model.enums.ServiceType.AIR_TIC
 import static az.travellab.ms_travel_application.model.enums.ServiceType.TOUR;
 import static az.travellab.ms_travel_application.model.enums.TripMessages.*;
 import static az.travellab.ms_travel_application.util.DateUtil.DATE_UTIL;
-import static java.time.LocalDate.*;
+import static java.time.LocalDate.now;
 import static java.util.Collections.singletonList;
 
 @Service
@@ -38,8 +37,8 @@ public class ClientNotificationService {
                     var managerPhone = client.getPhoneTo();
                     var message = REMINDER_TRIP_ONE_DAY_BEFORE.getMessage().formatted(
                             client.getNameFrom(),
-                            offer.getTripDate(),
-                            offer.getReturnDate(),
+                            DATE_UTIL.formatDateTimeLocalDateTime(offer.getTripDate()),
+                            DATE_UTIL.formatDateTimeLocalDateTime(offer.getReturnDate()),
                             client.getNameTo(),
                             client.getPhoneTo()
                     );
@@ -58,7 +57,7 @@ public class ClientNotificationService {
 
     public void sendTripReminder() {
         var offers = offerRepository.findByTripDateBetweenAndStatusAndServiceTypeIn(
-                DATE_UTIL.toStartOfDay(), DATE_UTIL.toEndOfDay(), BOUGHT, List.of(AIR_TICKET, TOUR)
+                DATE_UTIL.toNowPlusHours(5),  DATE_UTIL.toNowPlusHours(6), BOUGHT, List.of(AIR_TICKET, TOUR)
         );
 
         if (offers.isEmpty()) return;
@@ -69,8 +68,8 @@ public class ClientNotificationService {
                     var managerPhone = client.getPhoneTo();
                     var message = REMINDER_TRIP_DAY.getMessage().formatted(
                             client.getNameFrom(),
-                            offer.getTripDate(),
-                            offer.getReturnDate(),
+                            DATE_UTIL.formatDateTimeLocalDateTime(offer.getTripDate()),
+                            DATE_UTIL.formatDateTimeLocalDateTime(offer.getReturnDate()),
                             client.getNameTo(),
                             client.getPhoneTo()
                     );
@@ -81,7 +80,7 @@ public class ClientNotificationService {
 
     public void returnReminder() {
         var offers = offerRepository.findByReturnDateBetweenAndStatusAndServiceTypeIn(
-                DATE_UTIL.toStartOfDay(), DATE_UTIL.toEndOfDay(), BOUGHT, List.of(AIR_TICKET, TOUR)
+                DATE_UTIL.toNowPlusHours(5),  DATE_UTIL.toNowPlusHours(6), BOUGHT, List.of(AIR_TICKET, TOUR)
         );
 
         if (offers.isEmpty()) return;
@@ -92,7 +91,7 @@ public class ClientNotificationService {
                     var managerPhone = client.getPhoneTo();
                     var message = REMINDER_RETURN_DAY.getMessage().formatted(
                             client.getNameFrom(),
-                            offer.getReturnDate(),
+                            DATE_UTIL.formatDateTimeLocalDateTime(offer.getReturnDate()),
                             client.getNameTo(),
                             client.getPhoneTo()
                     );
