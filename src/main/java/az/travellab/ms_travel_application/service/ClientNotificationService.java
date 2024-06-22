@@ -57,7 +57,7 @@ public class ClientNotificationService {
 
     public void sendTripReminder() {
         var offers = offerRepository.findByTripDateBetweenAndStatusAndServiceTypeIn(
-                DATE_UTIL.toNowPlusHours(5),  DATE_UTIL.toNowPlusHours(6), BOUGHT, List.of(AIR_TICKET, TOUR)
+                DATE_UTIL.toNowPlusHours(11),  DATE_UTIL.toNowPlusHours(12), BOUGHT, List.of(AIR_TICKET, TOUR)
         );
 
         if (offers.isEmpty()) return;
@@ -80,7 +80,7 @@ public class ClientNotificationService {
 
     public void returnReminder() {
         var offers = offerRepository.findByReturnDateBetweenAndStatusAndServiceTypeIn(
-                DATE_UTIL.toNowPlusHours(5),  DATE_UTIL.toNowPlusHours(6), BOUGHT, List.of(AIR_TICKET, TOUR)
+                DATE_UTIL.toNowPlusHours(11),  DATE_UTIL.toNowPlusHours(12), BOUGHT, List.of(AIR_TICKET, TOUR)
         );
 
         if (offers.isEmpty()) return;
