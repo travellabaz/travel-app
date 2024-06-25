@@ -9,6 +9,7 @@ import az.travellab.ms_travel_application.dao.repository.SalesRepository;
 import az.travellab.ms_travel_application.exception.NotFoundException;
 import az.travellab.ms_travel_application.model.dto.SalesComponentsDto;
 import az.travellab.ms_travel_application.model.dto.SalesPaymentsDto;
+import az.travellab.ms_travel_application.model.enums.Employee;
 import az.travellab.ms_travel_application.model.enums.FilterType;
 import az.travellab.ms_travel_application.model.request.sales.SalesComponentsRequest;
 import az.travellab.ms_travel_application.model.request.sales.SalesPaymentsRequest;
@@ -26,26 +27,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static az.travellab.ms_travel_application.exception.ExceptionMessages.CLIENT_NOT_FOUND;
-import static az.travellab.ms_travel_application.exception.ExceptionMessages.ENTITY_NOT_FOUND;
-import static az.travellab.ms_travel_application.exception.ExceptionMessages.SALES_ALREADY_EXISTS;
-import static az.travellab.ms_travel_application.exception.ExceptionMessages.SALES_NOT_FOUND;
+import static az.travellab.ms_travel_application.exception.ExceptionMessages.*;
 import static az.travellab.ms_travel_application.factory.PageableCommonMapper.PAGEABLE_COMMON_MAPPER;
 import static az.travellab.ms_travel_application.factory.SalesComponentsMapper.SALES_COMPONENTS_MAPPER;
 import static az.travellab.ms_travel_application.factory.SalesMapper.SALES_MAPPER;
 import static az.travellab.ms_travel_application.factory.SalesPaymentsMapper.SALES_PAYMENTS_MAPPER;
-import static az.travellab.ms_travel_application.model.enums.Employee.getEmployeeNameByPhone;
 import static az.travellab.ms_travel_application.model.enums.SalesMessageQueries.GET_ALL_SALES;
 import static az.travellab.ms_travel_application.model.enums.SalesMessageQueries.GET_ALL_SALES_COUNT;
 import static az.travellab.ms_travel_application.util.HttpContextUtil.HTTP_CONTEXT_UTIL;
@@ -86,7 +79,7 @@ public class SalesService {
         var salesNumber = generateUniqueSalesNumber();
         validateSalesNumber(salesNumber);
 
-        var salesperson = getEmployeeNameByPhone(salesRequest.getSalespersonNumber());
+        var salesperson = Employee.getEmployeeNameByPhone(salesRequest.getSalespersonNumber());
 
         var client = clientService.prepareFindClientEntityByPhoneFrom(salesRequest.getClientNumber()).orElseThrow(
                 () -> new NotFoundException(CLIENT_NOT_FOUND.getMessage().formatted(salesRequest.getClientNumber())));
@@ -104,7 +97,7 @@ public class SalesService {
 
         var salesEntity = getSalesEntityByNumber(salesNumber);
 
-        var salesperson = getEmployeeNameByPhone(request.getSalespersonNumber());
+        var salesperson = Employee.getEmployeeNameByPhone(request.getSalespersonNumber());
 
         var client = clientService.prepareFindClientEntityByPhoneFrom(request.getClientNumber()).orElseThrow(
                 () -> new NotFoundException(CLIENT_NOT_FOUND.getMessage().formatted(request.getClientNumber())));

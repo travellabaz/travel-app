@@ -5,18 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.nameFrom;
 import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.phoneFrom;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.clientClass;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.createdAt;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.employeeBonus;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.number;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.profit;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.purchasedAmount;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.salesperson;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.soldAmount;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.status;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.tripEndDate;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.tripStartDate;
-import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.type;
+import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.*;
 import static az.travellab.ms_travel_application.exception.ExceptionMessages.FIELD_NOT_FOUND;
 import static java.util.Arrays.stream;
 

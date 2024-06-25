@@ -2,18 +2,8 @@ package az.travellab.ms_travel_application.dao.entity;
 
 import az.travellab.ms_travel_application.model.enums.SalesComponentsStatus;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.UpdateTimestamp;
 
