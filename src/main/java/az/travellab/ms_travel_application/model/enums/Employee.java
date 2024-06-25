@@ -30,4 +30,11 @@ public enum Employee {
                     return EMPLOYEE_OTHER;
                 });
     }
+
+    public static String getEmployeeNameByPhone(String phone) {
+        return stream(Employee.values())
+                .filter(employee -> employee.getPhone().equals(phone))
+                .findFirst()
+                .get().name;
+    }
 }

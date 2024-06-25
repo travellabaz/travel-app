@@ -1,0 +1,194 @@
+databaseChangeLog:
+  - changeSet:
+      id: sales-tables-init
+      author: Kamil Mammadov
+      changes:
+        - createTable:
+            tableName: sales
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: number
+                  type: varchar2(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: is_official
+                  type: boolean
+              - column:
+                  name: type
+                  type: varchar2(32)
+              - column:
+                  name: class
+                  type: varchar2(32)
+              - column:
+                  name: client_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: sales_client_fkey
+                    references: clients(id)
+                    nullable: false
+              - column:
+                  name: salesperson
+                  type: varchar2(32)
+              - column:
+                  name: purchased_amount
+                  type: decimal
+              - column:
+                  name: sold_amount
+                  type: decimal
+              - column:
+                  name: trip_start_date
+                  type: date
+              - column:
+                  name: trip_end_date
+                  type: date
+              - column:
+                  name: employee_bonus
+                  type: decimal
+              - column:
+                  name: is_employee_bonus_paid
+                  type: boolean
+              - column:
+                  name: profit
+                  type: decimal
+              - column:
+                  name: status
+                  type: varchar2(32)
+              - column:
+                  name: cancel_reason
+                  type: varchar2(255)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+        - createTable:
+            tableName: sales_components
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sales_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: sales_components_fkey
+                    references: sales(id) on update cascade on delete cascade
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar2(32)
+              - column:
+                  name: name
+                  type: varchar2(32)
+              - column:
+                  name: booking_number
+                  type: varchar2(32)
+              - column:
+                  name: percentage
+                  type: decimal
+              - column:
+                  name: description
+                  type: varchar2(255)
+              - column:
+                  name: purchased_amount
+                  type: decimal
+              - column:
+                  name: sold_amount
+                  type: decimal
+              - column:
+                  name: paid_amount
+                  type: decimal
+              - column:
+                  name: transfer_commission
+                  type: decimal
+              - column:
+                  name: remained_amount
+                  type: decimal
+              - column:
+                  name: is_invoice_sent
+                  type: boolean
+              - column:
+                  name: status
+                  type: varchar2(32)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+        - createTable:
+            tableName: sales_payments
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sales_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: sales_payments_fkey
+                    references: sales(id) on update cascade on delete cascade
+                    nullable: false
+              - column:
+                  name: amount
+                  type: decimal
+              - column:
+                  name: change
+                  type: decimal
+              - column:
+                  name: remaining
+                  type: decimal
+              - column:
+                  name: type
+                  type: varchar2(32)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+        - createTable:
+            tableName: sales_city
+            columns:
+              - column:
+                  name: sales_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: sales_cities_fkey
+                    references: sales(id) on update cascade on delete cascade
+                    nullable: false
+              - column:
+                  name: city_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: cities_sales_fkey
+                    references: cities(id)
+                    nullable: false

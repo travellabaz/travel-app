@@ -4,7 +4,6 @@ import lombok.SneakyThrows;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -20,6 +19,7 @@ public enum DateUtil {
     public LocalDateTime toStartOfDay() {
         return LocalDateTime.now().toLocalDate().atStartOfDay();
     }
+
     public LocalDateTime toEndOfDay() {
         return LocalDateTime.now().toLocalDate().atTime(23, 59, 59);
     }
@@ -35,6 +35,9 @@ public enum DateUtil {
 
     @SneakyThrows
     public XMLGregorianCalendar toXMLGregorianCalendar(String date) {
-        return DatatypeFactory.newInstance().newXMLGregorianCalendar(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX").format(LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-d'T'HH:mm:ss.SSSSSS")).atZone(ZoneId.systemDefault())));
+        return DatatypeFactory.newInstance()
+                .newXMLGregorianCalendar(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
+                        .format(LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-d'T'HH:mm:ss.SSSSSS"))
+                                .atZone(ZoneId.systemDefault())));
     }
 }

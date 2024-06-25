@@ -7,8 +7,8 @@ import az.travellab.ms_travel_application.model.response.PageableClientResponse;
 
 import java.util.List;
 
-public enum PageableClientMapper {
-    PAGEABLE_CLIENT_MAPPER;
+public enum PageableCommonMapper {
+    PAGEABLE_COMMON_MAPPER;
 
     public PageableClientResponse generatePageableClientResponse(List<ClientResponse> clientEntities, int totalPages, boolean hasNextPage, long totalElements) {
         return PageableClientResponse.builder()

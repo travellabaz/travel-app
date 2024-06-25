@@ -3,15 +3,27 @@ package az.travellab.ms_travel_application.model.enums;
 import az.travellab.ms_travel_application.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 
-import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.*;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.citizenCountry;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.genderType;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.isMarried;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.isParent;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.mail;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.message;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.nameFrom;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.nameTo;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.phoneFrom;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.phoneTo;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.pin;
+import static az.travellab.ms_travel_application.dao.entity.ClientEntity.Fields.username;
 import static az.travellab.ms_travel_application.dao.entity.OfferEntity.Fields.serviceType;
 import static az.travellab.ms_travel_application.dao.entity.OfferEntity.Fields.status;
+import static az.travellab.ms_travel_application.dao.entity.SalesEntity.Fields.number;
 import static az.travellab.ms_travel_application.exception.ExceptionMessages.FIELD_NOT_FOUND;
 import static java.util.Arrays.stream;
 
 @RequiredArgsConstructor
-public enum FieldsQueryExpressions {
-
+public enum ClientFieldsQueryExpressions {
+    NUMBER(number, " upper(number) LIKE :%s"),
     NAME_TO(nameTo, " upper(name_to) like :%s"),
     PHONE_TO(phoneTo, " phone_to LIKE :%s"),
     NAME_FROM(nameFrom, " upper(name_from) like :%s"),

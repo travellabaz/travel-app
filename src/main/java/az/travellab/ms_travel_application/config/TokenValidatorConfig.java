@@ -22,7 +22,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 public class TokenValidatorConfig extends OncePerRequestFilter {
     private final ObjectMapper mapper = new ObjectMapper();
-    private final ApplicationProperty applicationProperty;
     private final List<String> tokens = List.of(
             "e50dafb992e030660a9dd87207fb4e99b8",
             "a82849063d96719c97c785b86f5f6789",

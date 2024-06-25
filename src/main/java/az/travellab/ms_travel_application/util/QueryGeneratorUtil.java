@@ -1,5 +1,8 @@
 package az.travellab.ms_travel_application.util;
 
+import az.travellab.ms_travel_application.model.enums.ClientFieldsQueryExpressions;
+import az.travellab.ms_travel_application.model.enums.FilterType;
+import az.travellab.ms_travel_application.model.enums.SalesFieldsQueryExpressions;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import lombok.RequiredArgsConstructor;
@@ -9,22 +12,31 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static az.travellab.ms_travel_application.model.enums.FieldsQueryExpressions.getExpression;
 import static lombok.AccessLevel.PRIVATE;
 
 @RequiredArgsConstructor(access = PRIVATE)
 public final class QueryGeneratorUtil {
     private final StringBuilder query;
-    private final static List<String> fields = List.of("nameTo", "nameFrom", "phoneTo", "phoneFrom", "message", "mail");
+    private static final List<String> fields = List.of("nameTo", "nameFrom", "phoneTo", "phoneFrom", "message", "mail");
 
     public static QueryGeneratorUtil buildBaseQuery(String baseQuery) {
         return new QueryGeneratorUtil(new StringBuilder(baseQuery));
     }
 
-    public QueryGeneratorUtil generateFilter(Set<String> paramNames) {
-        paramNames.stream()
-                .filter(paramName -> !(paramName.equals("page") || paramName.equals("count")))
-                .forEach(paramName -> query.append(getExpression(paramName)));
+    public QueryGeneratorUtil generateFilter(Set<String> paramNames, FilterType type) {
+
+        final var count = "count";
+        final var page = "page";
+
+        if (type.equals(FilterType.CLIENTS)) {
+            paramNames.stream()
+                    .filter(paramName -> !(paramName.equals(page) || paramName.equals(count)))
+                    .forEach(paramName -> query.append(ClientFieldsQueryExpressions.getExpression(paramName)));
+        } else {
+            paramNames.stream()
+                    .filter(paramName -> !(paramName.equals(page) || paramName.equals(count)))
+                    .forEach(paramName -> query.append(SalesFieldsQueryExpressions.getExpression(paramName)));
+        }
         return this;
     }
 

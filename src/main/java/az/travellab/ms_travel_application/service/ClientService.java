@@ -3,6 +3,7 @@ package az.travellab.ms_travel_application.service;
 import az.travellab.ms_travel_application.dao.entity.ClientEntity;
 import az.travellab.ms_travel_application.dao.repository.ClientRepository;
 import az.travellab.ms_travel_application.dao.repository.OfferRepository;
+import az.travellab.ms_travel_application.model.enums.FilterType;
 import az.travellab.ms_travel_application.model.request.ClientRegistrationRequest;
 import az.travellab.ms_travel_application.model.request.ClientUpdateRequest;
 import az.travellab.ms_travel_application.model.response.ClientResponse;
@@ -20,7 +21,7 @@ import java.util.Optional;
 
 import static az.travellab.ms_travel_application.factory.ClientMapper.CLIENT_MAPPER;
 import static az.travellab.ms_travel_application.factory.OfferMapper.OFFER_MAPPER;
-import static az.travellab.ms_travel_application.factory.PageableClientMapper.PAGEABLE_CLIENT_MAPPER;
+import static az.travellab.ms_travel_application.factory.PageableCommonMapper.PAGEABLE_COMMON_MAPPER;
 import static az.travellab.ms_travel_application.model.enums.PaymentMessageQueries.GET_ALL_CLIENTS;
 import static az.travellab.ms_travel_application.model.enums.PaymentMessageQueries.GET_ALL_CLIENTS_COUNT;
 import static az.travellab.ms_travel_application.util.HttpContextUtil.HTTP_CONTEXT_UTIL;
@@ -57,7 +58,7 @@ public class ClientService {
         return clientRepository.save(clientEntity);
     }
 
-    private Optional<ClientEntity> prepareFindClientEntityByPhoneFrom(String phone) {
+    public Optional<ClientEntity> prepareFindClientEntityByPhoneFrom(String phone) {
         return clientRepository.findClientEntityByPhoneFrom(phone);
     }
 
@@ -87,12 +88,12 @@ public class ClientService {
         var pageRequest = PAGE_UTIL.getPageRequest();
         var paymentResponseList = supplyAsync(() -> getClientList(nameValueParams, pageRequest));
         var paymentResponseListCount = supplyAsync(() -> getPaymentListCount(nameValueParams));
-        return PAGEABLE_CLIENT_MAPPER.buildPageableClientResponse(paymentResponseList.join(), paymentResponseListCount.join());
+        return PAGEABLE_COMMON_MAPPER.buildPageableClientResponse(paymentResponseList.join(), paymentResponseListCount.join());
     }
 
     private List<ClientResponse> getClientList(Map<String, String> nameValueParams, Pageable pageable) {
         return buildBaseQuery(GET_ALL_CLIENTS.getBaseQuery())
-                .generateFilter(nameValueParams.keySet())
+                .generateFilter(nameValueParams.keySet(), FilterType.CLIENTS)
                 .endWith(GET_ALL_CLIENTS.getEndOfQuery())
                 .getTypedQuery(entityManager, nameValueParams, pageable)
                 .unwrap(Query.class)
@@ -102,7 +103,7 @@ public class ClientService {
 
     private Long getPaymentListCount(Map<String, String> nameValueParams) {
         return (Long) buildBaseQuery(GET_ALL_CLIENTS_COUNT.getBaseQuery())
-                .generateFilter(nameValueParams.keySet())
+                .generateFilter(nameValueParams.keySet(), FilterType.CLIENTS)
                 .getTypedQuery(entityManager, nameValueParams, unpaged())
                 .getSingleResult();
     }

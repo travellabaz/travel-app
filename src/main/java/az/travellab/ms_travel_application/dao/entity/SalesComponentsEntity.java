@@ -1,14 +1,12 @@
 package az.travellab.ms_travel_application.dao.entity;
 
-import az.travellab.ms_travel_application.model.enums.OfferStatus;
+import az.travellab.ms_travel_application.model.enums.SalesComponentsStatus;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -16,76 +14,47 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.FieldNameConstants;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 import static jakarta.persistence.EnumType.STRING;
-import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
+
 @Getter
 @Setter
 @Entity
 @Builder
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldNameConstants
-@Table(name = "offers")
-public class OfferEntity {
+@Table(name = "sales_components")
+public class SalesComponentsEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
+    @ManyToOne
+    @JoinColumn(name = "sales_id")
+    private SalesEntity sales;
     @Enumerated(STRING)
-    private ServiceType serviceType;
-
+    private ServiceType type;
+    private String name;
+    private String bookingNumber;
+    private BigDecimal percentage;
+    private String description;
+    private BigDecimal purchasedAmount;
+    private BigDecimal soldAmount;
+    private BigDecimal paidAmount;
+    private BigDecimal transferCommission = new BigDecimal(0);
+    private BigDecimal remainedAmount = new BigDecimal(0);
+    private Boolean isInvoiceSent;
     @Enumerated(STRING)
-    private OfferStatus status;
-
-    @ManyToOne(fetch = LAZY)
-    private ClientEntity client;
-
-    @ManyToMany
-    @JoinTable(
-            name = "travel_offer_country",
-            joinColumns = @JoinColumn(name = "offer_id"),
-            inverseJoinColumns = @JoinColumn(name = "country_id")
-    )
-    private List<CountryEntity> countryEntityList;
-
-    @ManyToMany
-    @JoinTable(
-            name = "travel_offer_city",
-            joinColumns = @JoinColumn(name = "offer_id"),
-            inverseJoinColumns = @JoinColumn(name = "city_id")
-    )
-    private List<CityEntity> cityEntityList;
-
-    private LocalDateTime messageSentAt;
-
-    private LocalDate plannedDate;
-
-    private LocalDateTime tripDate;
-
-    private LocalDateTime returnDate;
-
-    private LocalDate purchaseDate;
-
-    private LocalDateTime initialPaymentDate;
-
-    private LocalDateTime paymentDate;
-
-    @CreationTimestamp
+    private SalesComponentsStatus status;
     private LocalDateTime createdAt;
-
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
@@ -93,7 +62,7 @@ public class OfferEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OfferEntity that = (OfferEntity) o;
+        SalesComponentsEntity that = (SalesComponentsEntity) o;
         return Objects.equals(id, that.id);
     }
 

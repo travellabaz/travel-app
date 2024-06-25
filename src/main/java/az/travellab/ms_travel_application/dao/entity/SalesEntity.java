@@ -1,7 +1,9 @@
 package az.travellab.ms_travel_application.dao.entity;
 
-import az.travellab.ms_travel_application.model.enums.OfferStatus;
+import az.travellab.ms_travel_application.model.enums.ClientType;
+import az.travellab.ms_travel_application.model.enums.SalesStatus;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
@@ -10,82 +12,72 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import lombok.experimental.FieldNameConstants;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import static jakarta.persistence.CascadeType.MERGE;
+import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.EnumType.STRING;
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
+
 @Getter
 @Setter
 @Entity
 @Builder
-@ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @FieldNameConstants
-@Table(name = "offers")
-public class OfferEntity {
-
+@Table(name = "sales")
+public class SalesEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-
+    private String number;
+    private Boolean isOfficial;
     @Enumerated(STRING)
-    private ServiceType serviceType;
-
+    private ServiceType type;
     @Enumerated(STRING)
-    private OfferStatus status;
-
+    @Column(name = "CLASS")
+    private ClientType clientClass;
     @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "CLIENT_ID")
     private ClientEntity client;
-
-    @ManyToMany
+    @ManyToMany(fetch = LAZY)
     @JoinTable(
-            name = "travel_offer_country",
-            joinColumns = @JoinColumn(name = "offer_id"),
-            inverseJoinColumns = @JoinColumn(name = "country_id")
-    )
-    private List<CountryEntity> countryEntityList;
-
-    @ManyToMany
-    @JoinTable(
-            name = "travel_offer_city",
-            joinColumns = @JoinColumn(name = "offer_id"),
+            name = "sales_city",
+            joinColumns = @JoinColumn(name = "sales_id"),
             inverseJoinColumns = @JoinColumn(name = "city_id")
     )
-    private List<CityEntity> cityEntityList;
-
-    private LocalDateTime messageSentAt;
-
-    private LocalDate plannedDate;
-
-    private LocalDateTime tripDate;
-
-    private LocalDateTime returnDate;
-
-    private LocalDate purchaseDate;
-
-    private LocalDateTime initialPaymentDate;
-
-    private LocalDateTime paymentDate;
-
-    @CreationTimestamp
+    private List<CityEntity> cities;
+    private String salesperson;
+    private BigDecimal purchasedAmount;
+    private BigDecimal soldAmount;
+    private LocalDateTime tripStartDate;
+    private LocalDateTime tripEndDate;
+    private BigDecimal employeeBonus;
+    private Boolean isEmployeeBonusPaid;
+    private BigDecimal profit;
+    @Enumerated(STRING)
+    private SalesStatus status;
+    private String cancelReason;
+    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY)
+    private List<SalesComponentsEntity> components;
+    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY)
+    private List<SalesPaymentsEntity> payments;
     private LocalDateTime createdAt;
-
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
@@ -93,7 +85,7 @@ public class OfferEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OfferEntity that = (OfferEntity) o;
+        SalesEntity that = (SalesEntity) o;
         return Objects.equals(id, that.id);
     }
 
