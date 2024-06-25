@@ -6,5 +6,5 @@ import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
 public final class HeaderConstants {
-    public final static String AUTHORIZATION = "Authorization";
+    public static final String AUTHORIZATION = "Authorization";
 }

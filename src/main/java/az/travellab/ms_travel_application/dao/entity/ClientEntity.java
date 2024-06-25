@@ -63,6 +63,9 @@ public class ClientEntity {
     @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "client")
     private List<OfferEntity> offerEntities;
 
+    @OneToMany(mappedBy = "client")
+    private List<SalesEntity> salesEntities;
+
     private LocalDateTime messageSentAt;
 
     @CreationTimestamp
