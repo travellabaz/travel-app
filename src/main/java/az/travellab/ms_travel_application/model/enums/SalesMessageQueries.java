@@ -6,6 +6,25 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum SalesMessageQueries {
+
+    GET_ALL_SALES_INFO("""
+            WITH sales AS (SELECT scl.request AS request, sl.number AS number
+                           FROM sales sl
+                                    INNER JOIN sales_change_log scl ON sl.id = scl.sales_id
+                           ORDER BY scl.version_id DESC)
+            SELECT request FROM SALES
+            GROUP BY number, request
+                        """, ""),
+
+    GET_ALL_SALES_INFO_COUNT("""
+            WITH sales AS (SELECT scl.request AS request, sl.number AS number
+                           FROM sales sl
+                                    INNER JOIN sales_change_log scl ON sl.id = scl.sales_id
+                           ORDER BY scl.version_id DESC)
+            SELECT COUNT(request) FROM SALES
+            GROUP BY number, request
+            """, ""),
+
     GET_ALL_SALES("""
             WITH sales AS (
                 SELECT
@@ -17,6 +36,7 @@ public enum SalesMessageQueries {
                     clients_table.phone_from AS client_phone,
                     clients_table.pin        AS client_pin,
                     sales_table.salesperson,
+                    sales_table.has_client_relationship AS has_client_relationship,
                     cities_table.name        AS city_name,
                     countries_table.name     AS country_name,
                     sales_table.purchased_amount,
@@ -50,6 +70,7 @@ public enum SalesMessageQueries {
                 city_name,
                 country_name,
                 salesperson,
+                has_client_relationship,
                 purchased_amount,
                 sold_amount,
                 trip_start_date,
@@ -61,6 +82,7 @@ public enum SalesMessageQueries {
             FROM sales
             WHERE rn = 1
                 """, " ORDER BY created_at DESC"),
+
     GET_ALL_SALES_COUNT("""
             SELECT
               COUNT(*)

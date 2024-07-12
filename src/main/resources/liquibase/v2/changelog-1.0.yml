@@ -39,6 +39,9 @@ databaseChangeLog:
                   name: salesperson
                   type: varchar2(32)
               - column:
+                  name: has_client_relationship
+                  type: boolean
+              - column:
                   name: purchased_amount
                   type: decimal
               - column:
@@ -64,6 +67,9 @@ databaseChangeLog:
                   type: varchar2(32)
               - column:
                   name: cancel_reason
+                  type: varchar2(255)
+              - column:
+                  name: note
                   type: varchar2(255)
               - column:
                   name: created_at
@@ -192,3 +198,37 @@ databaseChangeLog:
                     foreignKeyName: cities_sales_fkey
                     references: cities(id)
                     nullable: false
+        - createTable:
+            tableName: sales_change_log
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sales_id
+                  type: bigint
+                  constraints:
+                    foreignKey: true
+                    foreignKeyName: sales_change_log_fkey
+                    references: sales(id) on update cascade
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar2(32)
+              - column:
+                  name: version_id
+                  type: int
+              - column:
+                  name: request
+                  type: text
+              - column:
+                  name: is_approved
+                  type: boolean
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()

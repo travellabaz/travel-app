@@ -63,6 +63,8 @@ public class SalesEntity {
     )
     private List<CityEntity> cities;
     private String salesperson;
+    @Column(name = "HAS_CLIENT_RELATIONSHIP")
+    private Boolean hasClientRelationship;
     private BigDecimal purchasedAmount;
     private BigDecimal soldAmount;
     private LocalDateTime tripStartDate;
@@ -73,10 +75,12 @@ public class SalesEntity {
     @Enumerated(STRING)
     private SalesStatus status;
     private String cancelReason;
-    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY)
+    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY, orphanRemoval = true)
     private List<SalesComponentsEntity> components;
-    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY)
+    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY, orphanRemoval = true)
     private List<SalesPaymentsEntity> payments;
+    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY)
+    private List<SalesChangeLogEntity> changeLogs;
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;

@@ -5,13 +5,16 @@ import org.hibernate.query.TupleTransformer;
 
 import static java.lang.String.valueOf;
 
-public class SalesResponseTransformerUtil implements TupleTransformer<SalesSearchResponse> {
-    public static final SalesResponseTransformerUtil SALES_RESPONSE_TRANSFORMER = new SalesResponseTransformerUtil();
+public class SalesSearchResponseTransformerUtil implements TupleTransformer<SalesSearchResponse> {
+    public static final SalesSearchResponseTransformerUtil SALES_SEARCH_RESPONSE_TRANSFORMER_UTIL = new SalesSearchResponseTransformerUtil();
 
     @Override
     public SalesSearchResponse transformTuple(Object[] tuple, String[] aliases) {
         int i = 0;
-        return new SalesSearchResponse( //todo fix response style
+        return new SalesSearchResponse(
+                valueOf(tuple[i++]),
+                valueOf(tuple[i++]),
+                valueOf(tuple[i++]),
                 valueOf(tuple[i++]),
                 valueOf(tuple[i++]),
                 valueOf(tuple[i++]),

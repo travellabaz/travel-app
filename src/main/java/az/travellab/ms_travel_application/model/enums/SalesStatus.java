@@ -4,5 +4,6 @@ public enum SalesStatus {
     COMPLETED,
     PENDING_FOR_APPROVE,
     REVERSED,
-    CANCELED
+    CANCELED,
+    CLOSED
 }

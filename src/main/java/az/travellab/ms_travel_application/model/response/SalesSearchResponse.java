@@ -8,7 +8,6 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class SalesSearchResponse {
-
     private String id;
     private String number;
     private String type;
@@ -16,7 +15,10 @@ public class SalesSearchResponse {
     private String clientName;
     private String clientPhone;
     private String clientPin;
+    private String cityName;
+    private String countryName;
     private String salesperson;
+    private String hasClientRelationship;
     private String purchasedAmount;
     private String soldAmount;
     private String tripStartDate;
