@@ -33,11 +33,6 @@ public enum SalesComponentsMapper {
                 .build();
     }
 
-    public void updateSalesComponentsEntity(SalesComponentsEntity componentsEntity, SalesComponentsRequest componentsRequest) {
-        BeanUtils.copyProperties(componentsRequest, componentsEntity);
-        componentsEntity.setCreatedAt(componentsRequest.getDate());
-    }
-
     public SalesComponentsDto generateComponentsDto(SalesComponentsEntity componentsEntity) {
         var componentDto = new SalesComponentsDto();
         BeanUtils.copyProperties(componentsEntity, componentDto);

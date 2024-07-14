@@ -22,6 +22,7 @@ import java.util.List;
 public class SalesInfoResponse {
     private Long id;
     private String number;
+    private Boolean isOfficial;
     private ServiceType type;
     private ClientType clientClass;
     private String clientName;

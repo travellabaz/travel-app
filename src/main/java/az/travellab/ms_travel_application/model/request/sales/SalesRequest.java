@@ -11,11 +11,14 @@ import java.util.List;
 
 @Data
 public class SalesRequest {
+    private String number;
     private Boolean isOfficial;
     private ServiceType type;
     @JsonProperty("class")
     private ClientType clientClass;
     private String salespersonNumber;
+    private Boolean hasClientRelationship;
+    private Boolean isEmployeeBonusPaid;
     private String clientNumber;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime tripStartDate;
@@ -23,6 +26,7 @@ public class SalesRequest {
     private LocalDateTime tripEndDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime salesDate;
+    private String cancelReason;
     private List<Long> citiesIds;
     private List<SalesComponentsRequest> components;
     private List<SalesPaymentsRequest> payments;

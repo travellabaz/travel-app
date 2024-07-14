@@ -3,8 +3,22 @@ package az.travellab.ms_travel_application.dao.entity;
 import az.travellab.ms_travel_application.model.enums.ClientType;
 import az.travellab.ms_travel_application.model.enums.SalesStatus;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -49,6 +63,8 @@ public class SalesEntity {
     )
     private List<CityEntity> cities;
     private String salesperson;
+    @Column(name = "HAS_CLIENT_RELATIONSHIP")
+    private Boolean hasClientRelationship;
     private BigDecimal purchasedAmount;
     private BigDecimal soldAmount;
     private LocalDateTime tripStartDate;
@@ -59,10 +75,12 @@ public class SalesEntity {
     @Enumerated(STRING)
     private SalesStatus status;
     private String cancelReason;
-    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY)
+    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY, orphanRemoval = true)
     private List<SalesComponentsEntity> components;
-    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY)
+    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY, orphanRemoval = true)
     private List<SalesPaymentsEntity> payments;
+    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY)
+    private List<SalesChangeLogEntity> changeLogs;
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;

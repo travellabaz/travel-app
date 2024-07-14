@@ -15,8 +15,6 @@ public interface SalesRepository extends CrudRepository<SalesEntity, Long> {
 
     Optional<SalesEntity> findByNumber(@Param("saleNumber") String saleNumber);
 
-    void deleteByNumber(@Param("saleNumber") String saleNumber);
-
     @Query(value = """
             SELECT salesperson, SUM(employee_bonus) AS bonus FROM sales
             WHERE is_employee_bonus_paid IS FALSE

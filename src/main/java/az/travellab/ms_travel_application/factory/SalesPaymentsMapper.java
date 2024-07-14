@@ -25,11 +25,6 @@ public enum SalesPaymentsMapper {
                 .build();
     }
 
-    public void updateSalesPaymentsEntity(SalesPaymentsEntity paymentsEntity, SalesPaymentsRequest paymentsRequest) {
-        BeanUtils.copyProperties(paymentsRequest, paymentsEntity);
-        paymentsEntity.setCreatedAt(paymentsRequest.getDate());
-    }
-
     public SalesPaymentsDto generatePaymentsDto(SalesPaymentsEntity paymentsEntity) {
         var paymentsDto = new SalesPaymentsDto();
         BeanUtils.copyProperties(paymentsEntity, paymentsDto);
