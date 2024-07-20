@@ -1,6 +1,6 @@
 package az.travellab.ms_travel_application.model.dto;
 
-import az.travellab.ms_travel_application.model.enums.SalesStatus;
+import az.travellab.ms_travel_application.model.enums.SalesComponentsStatus;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SalesComponentsDto {
-    private Long id;
     private ServiceType type;
     private String name;
     private String bookingNumber;
@@ -25,9 +24,7 @@ public class SalesComponentsDto {
     private BigDecimal paidAmount;
     private BigDecimal remainedAmount;
     private BigDecimal transferCommission;
-    private SalesStatus status;
+    private SalesComponentsStatus status;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatedAt;
 }

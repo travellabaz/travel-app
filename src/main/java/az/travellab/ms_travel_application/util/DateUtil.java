@@ -41,6 +41,10 @@ public enum DateUtil {
         return LocalDateTime.now().plusDays(1).toLocalDate().atTime(23, 59, 59);
     }
 
+    public LocalDateTime sync(LocalDateTime date) {
+        return date.plusHours(4);
+    }
+
     @SneakyThrows
     public XMLGregorianCalendar toXMLGregorianCalendar(String date) {
         return DatatypeFactory.newInstance().newXMLGregorianCalendar(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX").format(LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-d'T'HH:mm:ss.SSSSSS")).atZone(ZoneId.systemDefault())));

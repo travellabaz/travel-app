@@ -3,20 +3,20 @@ package az.travellab.ms_travel_application.factory;
 import az.travellab.ms_travel_application.dao.entity.SalesComponentsEntity;
 import az.travellab.ms_travel_application.dao.entity.SalesEntity;
 import az.travellab.ms_travel_application.model.dto.SalesComponentsDto;
-import az.travellab.ms_travel_application.model.request.sales.SalesComponentsRequest;
 import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDateTime;
 
+import static az.travellab.ms_travel_application.util.DateUtil.DATE_UTIL;
+
 public enum SalesComponentsMapper {
     SALES_COMPONENTS_MAPPER;
 
-    public SalesComponentsEntity generateSalesComponentsEntity(SalesEntity salesEntity, SalesComponentsRequest componentsRequest) {
+    public SalesComponentsEntity generateSalesComponentsEntity(SalesEntity salesEntity, SalesComponentsDto componentsRequest) {
 
-        var date = componentsRequest.getDate() == null ? LocalDateTime.now() : componentsRequest.getDate();
+        var date = componentsRequest.getCreatedAt() == null ? LocalDateTime.now() : componentsRequest.getCreatedAt();
 
         return SalesComponentsEntity.builder()
-                .id(componentsRequest.getId())
                 .sales(salesEntity)
                 .type(componentsRequest.getType())
                 .name(componentsRequest.getName())
@@ -28,7 +28,7 @@ public enum SalesComponentsMapper {
                 .paidAmount(componentsRequest.getPaidAmount())
                 .remainedAmount(componentsRequest.getRemainedAmount())
                 .transferCommission(componentsRequest.getTransferCommission())
-                .createdAt(date)
+                .createdAt(DATE_UTIL.sync(date))
                 .status(componentsRequest.getStatus())
                 .build();
     }

@@ -1,6 +1,6 @@
 package az.travellab.ms_travel_application.model.request.sales;
 
-import az.travellab.ms_travel_application.model.enums.ClientType;
+import az.travellab.ms_travel_application.model.enums.ClientClass;
 import az.travellab.ms_travel_application.model.enums.SalesStatus;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -14,7 +14,7 @@ import java.util.List;
 public class SalesUpdateRequest {
     private Boolean isOfficial;
     private ServiceType type;
-    private ClientType clientClass;
+    private ClientClass clientClass;
     private String clientNumber;
     private List<Long> citiesIds;
     private String salespersonNumber;
@@ -28,5 +28,5 @@ public class SalesUpdateRequest {
     private SalesStatus status;
     private String cancelReason;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime salesDate;
+    private LocalDateTime createdAt;
 }

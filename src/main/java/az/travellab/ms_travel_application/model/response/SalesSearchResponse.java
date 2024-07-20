@@ -1,30 +1,37 @@
 package az.travellab.ms_travel_application.model.response;
 
+import az.travellab.ms_travel_application.model.enums.ClientClass;
+import az.travellab.ms_travel_application.model.enums.SalesStatus;
+import az.travellab.ms_travel_application.model.enums.ServiceType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
 @AllArgsConstructor
 public class SalesSearchResponse {
-    private String id;
     private String number;
-    private String type;
-    private String clientClass;
+    private Boolean isOfficial;
+    private ServiceType type;
+    private ClientClass clientClass;
     private String clientName;
     private String clientPhone;
     private String clientPin;
-    private String cityName;
-    private String countryName;
     private String salesperson;
-    private String hasClientRelationship;
-    private String purchasedAmount;
-    private String soldAmount;
-    private String tripStartDate;
-    private String tripEndDate;
-    private String employeeBonus;
-    private String profit;
-    private String status;
-    private String createdAt;
+    private Boolean hasClientRelationship;
+    private BigDecimal purchasedAmount;
+    private BigDecimal soldAmount;
+    private LocalDateTime tripStartDate;
+    private LocalDateTime tripEndDate;
+    private BigDecimal employeeBonus;
+    private Boolean isEmployeeBonusPaid;
+    private BigDecimal profit;
+    private SalesStatus status;
+    private String cancelReason;
+    private String note;
+    private LocalDateTime createdAt;
 }

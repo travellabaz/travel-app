@@ -1,6 +1,8 @@
 package az.travellab.ms_travel_application.model.request.sales;
 
-import az.travellab.ms_travel_application.model.enums.ClientType;
+import az.travellab.ms_travel_application.model.dto.SalesComponentsDto;
+import az.travellab.ms_travel_application.model.dto.SalesPaymentsDto;
+import az.travellab.ms_travel_application.model.enums.ClientClass;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,7 +17,7 @@ public class SalesRequest {
     private Boolean isOfficial;
     private ServiceType type;
     @JsonProperty("class")
-    private ClientType clientClass;
+    private ClientClass clientClass;
     private String salespersonNumber;
     private Boolean hasClientRelationship;
     private Boolean isEmployeeBonusPaid;
@@ -25,9 +27,9 @@ public class SalesRequest {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime tripEndDate;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime salesDate;
+    private LocalDateTime createdAt;
     private String cancelReason;
     private List<Long> citiesIds;
-    private List<SalesComponentsRequest> components;
-    private List<SalesPaymentsRequest> payments;
+    private List<SalesComponentsDto> components;
+    private List<SalesPaymentsDto> payments;
 }
