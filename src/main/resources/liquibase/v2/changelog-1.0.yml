@@ -49,10 +49,10 @@ databaseChangeLog:
                   type: decimal
               - column:
                   name: trip_start_date
-                  type: date
+                  type: timestamp
               - column:
                   name: trip_end_date
-                  type: date
+                  type: timestamp
               - column:
                   name: employee_bonus
                   type: decimal
