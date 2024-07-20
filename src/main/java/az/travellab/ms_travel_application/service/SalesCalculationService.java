@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static az.travellab.ms_travel_application.exception.ExceptionMessages.SALES_NOT_FOUND;
+import static az.travellab.ms_travel_application.model.enums.SalesStatus.PENDING_FOR_APPROVE;
+import static az.travellab.ms_travel_application.model.enums.SalesStatus.PENDING_FOR_EMPLOYEE_BONUS;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -37,12 +39,12 @@ public class SalesCalculationService {
 
         var soldAmount = calculationResult.soldAmount;
         var salesProfit = calculateSalesProfit(soldAmount, calculationResult.purchasedAmount);
-        var employeeBonus = calculateEmployeeBonus(salesProfit);
+        var employeeBonus = calculateEmployeeBonus(salesProfit, salesEntity.getHasClientRelationship());
         var companyProfit = calculateCompanyProfit(salesProfit, employeeBonus);
 
-        var status = SalesStatus.PENDING_FOR_APPROVE;
+        var status = PENDING_FOR_APPROVE;
         if (checkIfSalesCompleted(components, payments))
-            status = SalesStatus.COMPLETED;
+            status = PENDING_FOR_EMPLOYEE_BONUS;
 
         updateSalesEntity(salesEntity, calculationResult.purchasedAmount, calculationResult.soldAmount, employeeBonus, companyProfit, status);
 
@@ -91,7 +93,9 @@ public class SalesCalculationService {
         return soldAmount.subtract(purchasedAmount);
     }
 
-    private BigDecimal calculateEmployeeBonus(BigDecimal salesProfit) {
+    private BigDecimal calculateEmployeeBonus(BigDecimal salesProfit, boolean hasClientRelationship) {
+        if (salesProfit.compareTo(BigDecimal.ZERO) < 0) return BigDecimal.ZERO; //if sales has no profit
+        if (hasClientRelationship) return PercentageCalcUtil.calculatePercentage(salesProfit, BigDecimal.valueOf(50));
         return PercentageCalcUtil.calculatePercentage(salesProfit, BigDecimal.TEN);
     }
 

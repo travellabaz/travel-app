@@ -1,6 +1,6 @@
 package az.travellab.ms_travel_application.dao.entity;
 
-import az.travellab.ms_travel_application.model.enums.ClientType;
+import az.travellab.ms_travel_application.model.enums.ClientClass;
 import az.travellab.ms_travel_application.model.enums.SalesStatus;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
 import jakarta.persistence.Column;
@@ -45,13 +45,14 @@ public class SalesEntity {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String number;
     private Boolean isOfficial;
     @Enumerated(STRING)
     private ServiceType type;
     @Enumerated(STRING)
     @Column(name = "CLASS")
-    private ClientType clientClass;
+    private ClientClass clientClass;
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "CLIENT_ID")
     private ClientEntity client;
@@ -75,12 +76,13 @@ public class SalesEntity {
     @Enumerated(STRING)
     private SalesStatus status;
     private String cancelReason;
+    private String note;
     @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY, orphanRemoval = true)
     private List<SalesComponentsEntity> components;
     @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY, orphanRemoval = true)
     private List<SalesPaymentsEntity> payments;
     @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY)
-    private List<SalesChangeLogEntity> changeLogs;
+    private List<SalesChangeLogEntity> changelogs;
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;

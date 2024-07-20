@@ -1,6 +1,5 @@
 package az.travellab.ms_travel_application.model.response;
 
-import az.travellab.ms_travel_application.model.request.sales.SalesRequest;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,5 +16,5 @@ public class SalesChangeLogResponse {
     private Boolean isApproved;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date;
-    private SalesRequest request;
+    private SalesInfoResponse request;
 }

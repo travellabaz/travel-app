@@ -33,6 +33,10 @@ public enum DateUtil {
         return LocalDateTime.now().plusDays(1).toLocalDate().atTime(23, 59, 59);
     }
 
+    public LocalDateTime sync(LocalDateTime date) {
+        return date.plusHours(4);
+    }
+
     @SneakyThrows
     public XMLGregorianCalendar toXMLGregorianCalendar(String date) {
         return DatatypeFactory.newInstance()
