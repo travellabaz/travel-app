@@ -21,14 +21,14 @@ public class NotificationScheduler {
     }
 
     @Async
-    @Scheduled(cron = "0 0 8 * * *")
+    @Scheduled(fixedDelayString = "PT1H")
     @SchedulerLock(name = "sendTripReminder", lockAtLeastFor = "PT1M", lockAtMostFor = "PT5M")
     public void sendTripReminder() {
         clientNotificationService.sendTripReminder();
     }
 
     @Async
-    @Scheduled(cron = "0 0 8 * * *")
+    @Scheduled(fixedDelayString = "PT1H")
     @SchedulerLock(name = "returnReminder", lockAtLeastFor = "PT1M", lockAtMostFor = "PT5M")
     public void returnReminder() {
         clientNotificationService.returnReminder();

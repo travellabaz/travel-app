@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum PaymentMessageQueries {
+public enum ClientMessageQueries {
     GET_ALL_CLIENTS("""
             WITH clients_offers AS (SELECT cl.id,
                                                        cl.name_to,
@@ -54,7 +54,7 @@ public enum PaymentMessageQueries {
                                country_id
                         FROM clients_offers
                         WHERE rn = 1
-            """," ORDER BY created_at DESC"),
+            """, " ORDER BY created_at DESC"),
     GET_ALL_CLIENTS_COUNT("""
             WITH clients_offers AS (SELECT cl.id,
                                                        cl.name_to,
@@ -84,8 +84,8 @@ public enum PaymentMessageQueries {
                         SELECT count(*)
                         FROM clients_offers
                         WHERE rn = 1
-            """," ORDER BY created_at DESC");
+            """, " ORDER BY created_at DESC");
 
-   private final String baseQuery;
-   private final String endOfQuery;
+    private final String baseQuery;
+    private final String endOfQuery;
 }

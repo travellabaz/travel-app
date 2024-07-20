@@ -1,0 +1,9 @@
+databaseChangeLog:
+- changeSet:
+    id: modify-returnDate-column-type
+    author: Elnur Shirmammadov
+    changes:
+      - modifyDataType:
+          tableName: offers
+          columnName: return_date
+          newDataType: TIMESTAMP
