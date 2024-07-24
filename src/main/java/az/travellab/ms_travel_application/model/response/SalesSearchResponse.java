@@ -34,4 +34,6 @@ public class SalesSearchResponse {
     private String cancelReason;
     private String note;
     private LocalDateTime createdAt;
+    private String cityName;
+    private String countryName;
 }

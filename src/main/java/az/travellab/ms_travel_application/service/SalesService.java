@@ -122,9 +122,8 @@ public class SalesService {
         var nameValueParams = HTTP_CONTEXT_UTIL.getNameValueParams();
         var pageRequest = PAGE_UTIL.getPageRequest();
 
-        var salesResponseList = supplyAsync(() -> getSalesList(nameValueParams, pageRequest));
-
-        var newSalesResponseList = salesResponseList.join().stream().map(SALES_MAPPER::generateSalesInfoResponse).toList();
+        var salesResponseList = supplyAsync(() -> getSalesList(nameValueParams, pageRequest)).join();
+        var newSalesResponseList = salesResponseList.stream().map(SALES_MAPPER::generateSalesInfoResponse).toList();
         var count = (long) newSalesResponseList.size();
 
         return PAGEABLE_COMMON_MAPPER.buildPageableClientResponse(newSalesResponseList, count);

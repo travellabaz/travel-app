@@ -13,7 +13,6 @@ import java.util.Optional;
 @Repository
 public interface SalesRepository extends CrudRepository<SalesEntity, Long> {
 
-//    @EntityGraph(value = "Sales.detail", type = EntityGraph.EntityGraphType.LOAD)
     Optional<SalesEntity> findByNumber(@Param("saleNumber") String saleNumber);
 
     @Modifying

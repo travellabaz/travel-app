@@ -1,5 +1,5 @@
 databaseChangeLog:
   - includeAll:
       path: liquibase/v1
-  - includeAll:
-      path: liquibase/v2
+#  - includeAll:
+#      path: liquibase/v2

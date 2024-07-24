@@ -37,7 +37,9 @@ public class SalesSearchResponseTransformerUtil implements TupleTransformer<Sale
                 SalesStatus.valueOf(valueOfOrNull(tuple[i++])),
                 valueOfOrNull(tuple[i++]),
                 valueOfOrNull(tuple[i++]),
-                parseLocalDateTimeOrNull(tuple[i])
+                parseLocalDateTimeOrNull(tuple[i++]),
+                valueOfOrNull(tuple[i++]),
+                valueOfOrNull(tuple[i])
         );
     }
 
