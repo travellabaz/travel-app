@@ -25,20 +25,21 @@ import java.util.Map;
 import java.util.Optional;
 
 import static az.travellab.ms_travel_application.exception.ExceptionMessages.CLIENT_NOT_FOUND;
-import static az.travellab.ms_travel_application.exception.ExceptionMessages.SALES_ALREADY_EXISTS;
 import static az.travellab.ms_travel_application.exception.ExceptionMessages.SALES_NOT_FOUND;
 import static az.travellab.ms_travel_application.factory.PageableCommonMapper.PAGEABLE_COMMON_MAPPER;
 import static az.travellab.ms_travel_application.factory.SalesChangeLogMapper.SALES_CHANGE_LOG_MAPPER;
 import static az.travellab.ms_travel_application.factory.SalesMapper.SALES_MAPPER;
 import static az.travellab.ms_travel_application.model.enums.SalesMessageQueries.GET_ALL_SALES;
+import static az.travellab.ms_travel_application.model.enums.SalesMessageQueries.GET_ALL_SALES_INFO_COUNT;
 import static az.travellab.ms_travel_application.model.enums.SalesStatus.PENDING_FOR_APPROVE;
 import static az.travellab.ms_travel_application.util.HttpContextUtil.HTTP_CONTEXT_UTIL;
 import static az.travellab.ms_travel_application.util.MapperUtil.MAPPER_UTIL;
 import static az.travellab.ms_travel_application.util.PageUtil.PAGE_UTIL;
 import static az.travellab.ms_travel_application.util.QueryGeneratorUtil.buildBaseQuery;
 import static az.travellab.ms_travel_application.util.SalesSearchResponseTransformerUtil.SALES_SEARCH_RESPONSE_TRANSFORMER_UTIL;
-import static az.travellab.ms_travel_application.util.SecureRandomUtil.getRandomNumbers;
+import static az.travellab.ms_travel_application.util.SecureRandomUtil.generateUniqueNumber;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
+import static org.springframework.data.domain.Pageable.unpaged;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -53,7 +54,6 @@ public class SalesService {
 
     public String create(SalesRequest salesRequest) {
         var salesNumber = generateUniqueSalesNumber();
-        validateSalesNumber(salesNumber);
 
         var client = findClientByPhone(salesRequest.getClientNumber());
         var cities = cityService.getCitiesEntity(salesRequest.getCitiesIds());
@@ -100,10 +100,9 @@ public class SalesService {
         return SALES_CHANGE_LOG_MAPPER.generateSalesChangeLogResponse(salesEntity.getChangelogs(), client, cities);
     }
 
-    public void confirm(String salesNumber, Integer version) {
+    public void confirm(String salesNumber, Integer versionId) {
         var salesEntity = getSalesEntityByNumber(salesNumber);
 
-        var versionId = (version != null) ? version : getLatestVersionId(salesEntity);
         var changeLogEntity = getChangeLogEntityByVersion(salesEntity, versionId);
 
         var salesRequest = MAPPER_UTIL.map(changeLogEntity.getRequest(), SalesRequest.class);
@@ -123,11 +122,11 @@ public class SalesService {
         var pageRequest = PAGE_UTIL.getPageRequest();
 
         var salesResponseList = supplyAsync(() -> getSalesList(nameValueParams, pageRequest));
+        var salesResponseListCount = supplyAsync(() -> getSalesListCount(nameValueParams));
 
         var newSalesResponseList = salesResponseList.join().stream().map(SALES_MAPPER::generateSalesInfoResponse).toList();
-        var count = (long) newSalesResponseList.size();
 
-        return PAGEABLE_COMMON_MAPPER.buildPageableClientResponse(newSalesResponseList, count);
+        return PAGEABLE_COMMON_MAPPER.buildPageableClientResponse(newSalesResponseList, salesResponseListCount.join());
     }
 
     private ClientEntity findClientByPhone(String clientNumber) {
@@ -137,11 +136,6 @@ public class SalesService {
 
     private int getNextVersionId(List<SalesChangeLogEntity> changeLogEntities) {
         return changeLogEntities.isEmpty() ? 1 : changeLogEntities.get(changeLogEntities.size() - 1).getVersionId() + 1;
-    }
-
-    private int getLatestVersionId(SalesEntity salesEntity) {
-        var changeLogs = salesEntity.getChangelogs();
-        return changeLogs.get(changeLogs.size() - 1).getVersionId();
     }
 
     private SalesChangeLogEntity getChangeLogEntityByVersion(SalesEntity salesEntity, int versionId) {
@@ -161,14 +155,8 @@ public class SalesService {
     }
 
     private String generateUniqueSalesNumber() {
-        final var GENERATION_PREFIX = "TL-";
-        return GENERATION_PREFIX.concat(getRandomNumbers());
-    }
-
-    private void validateSalesNumber(String salesNumber) {
-        if (salesRepository.findByNumber(salesNumber).isPresent()) {
-            throw new IllegalArgumentException(SALES_ALREADY_EXISTS.getMessage().formatted(salesNumber));
-        }
+        final var GENERATION_FORMAT = "TL/%08d-%d";
+        return generateUniqueNumber(GENERATION_FORMAT);
     }
 
     private List<SalesSearchResponse> getSalesList(Map<String, String> nameValueParams, Pageable pageable) {
@@ -178,5 +166,12 @@ public class SalesService {
                 .unwrap(Query.class)
                 .setTupleTransformer(SALES_SEARCH_RESPONSE_TRANSFORMER_UTIL)
                 .getResultList();
+    }
+
+    private Long getSalesListCount(Map<String, String> nameValueParams) {
+        return (Long) buildBaseQuery(GET_ALL_SALES_INFO_COUNT.getBaseQuery())
+                .generateFilter(nameValueParams.keySet(), FilterType.SALES)
+                .getTypedQuery(entityManager, nameValueParams, unpaged())
+                .getSingleResult();
     }
 }

@@ -47,6 +47,7 @@ public class SalesEntity {
     private Long id;
     @Column(unique = true)
     private String number;
+    @Column(name = "is_official")
     private Boolean isOfficial;
     @Enumerated(STRING)
     private ServiceType type;
