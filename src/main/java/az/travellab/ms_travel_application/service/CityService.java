@@ -4,6 +4,7 @@ import az.travellab.ms_travel_application.dao.entity.CityEntity;
 import az.travellab.ms_travel_application.dao.repository.CityRepository;
 import az.travellab.ms_travel_application.model.response.CityResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,10 +28,12 @@ public class CityService {
                 .toList();
     }
 
+    @Cacheable(cacheNames = "citiesCache")
     public List<CityResponse> getCities() {
         return CITY_MAPPER.generateCitiesResponse(cityRepository.findAll());
     }
 
+    @Cacheable(cacheNames = "citiesCache")
     public List<CityEntity> getCitiesEntity(List<Long> ids) {
         return cityRepository.findByIdIn(ids).get();
     }

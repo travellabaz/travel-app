@@ -10,5 +10,4 @@ import java.util.Optional;
 public interface CityRepository extends JpaRepository<CityEntity, Long> {
     @EntityGraph(attributePaths = "country")
     Optional<List<CityEntity>> findByIdIn(List<Long> ids);
-
 }

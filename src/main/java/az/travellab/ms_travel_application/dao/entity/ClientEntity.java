@@ -2,8 +2,18 @@ package az.travellab.ms_travel_application.dao.entity;
 
 import az.travellab.ms_travel_application.model.enums.Employee;
 import az.travellab.ms_travel_application.model.enums.GenderType;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.FieldNameConstants;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -60,11 +70,11 @@ public class ClientEntity {
 
     private LocalDate birthDate;
 
-    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "client")
+    @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "client", fetch = FetchType.LAZY)
     private List<OfferEntity> offerEntities;
 
-    @OneToMany(mappedBy = "client")
-    private List<SalesEntity> salesEntities;
+//    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+//    private List<SalesEntity> salesEntities;
 
     private LocalDateTime messageSentAt;
 

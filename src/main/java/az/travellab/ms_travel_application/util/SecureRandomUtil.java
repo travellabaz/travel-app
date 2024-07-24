@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.time.Instant;
 
 @UtilityClass
 public class SecureRandomUtil {
@@ -19,7 +20,18 @@ public class SecureRandomUtil {
         random = secureRandom;
     }
 
-    public static String getRandomNumbers() {
-        return String.valueOf(random.nextInt(900000000) + 100000000);
+    public static int getRandomDigit() {
+        return random.nextInt(9) + 1;
+    }
+
+    public static String generateUniqueNumber(String format) {
+        long currentTimeNs = Instant.now().getNano();
+
+        long restOfNumber = currentTimeNs % 10000000;
+        long uniqueNumber = getRandomDigit() * 10000000L + restOfNumber;
+
+        int randomDigit = getRandomDigit();
+
+        return String.format(format, uniqueNumber, randomDigit);
     }
 }
