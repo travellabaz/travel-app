@@ -22,12 +22,6 @@ public class CityService {
         return getCity(message, cityRepository.findAll());
     }
 
-    private List<CityEntity> getCity(String message, List<CityEntity> cityEntities) {
-        return cityEntities.stream()
-                .filter(cityEntity -> COUNTRY_UTIL.findCountry(message, cityEntity.getName()))
-                .toList();
-    }
-
     @Cacheable(cacheNames = "citiesCache")
     public List<CityResponse> getCities() {
         return CITY_MAPPER.generateCitiesResponse(cityRepository.findAll());
@@ -36,6 +30,16 @@ public class CityService {
     @Cacheable(cacheNames = "citiesCache")
     public List<CityEntity> getCitiesEntity(List<Long> ids) {
         return cityRepository.findByIdIn(ids).get();
+    }
+
+    public List<CityEntity> getCitiesEntity() {
+        return cityRepository.findAll();
+    }
+
+    private List<CityEntity> getCity(String message, List<CityEntity> cityEntities) {
+        return cityEntities.stream()
+                .filter(cityEntity -> COUNTRY_UTIL.findCountry(message, cityEntity.getName()))
+                .toList();
     }
 }
 

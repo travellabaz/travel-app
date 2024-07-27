@@ -3,24 +3,9 @@ package az.travellab.ms_travel_application.dao.entity;
 import az.travellab.ms_travel_application.model.enums.ClientClass;
 import az.travellab.ms_travel_application.model.enums.SalesStatus;
 import az.travellab.ms_travel_application.model.enums.ServiceType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.FieldNameConstants;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -85,7 +70,6 @@ public class SalesEntity {
     @OneToMany(cascade = {PERSIST, MERGE}, mappedBy = "sales", fetch = LAZY)
     private List<SalesChangeLogEntity> changelogs;
     private LocalDateTime createdAt;
-    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     @Override

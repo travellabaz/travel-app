@@ -12,10 +12,6 @@ import java.time.format.DateTimeFormatter;
 public enum DateUtil {
     DATE_UTIL;
 
-    public LocalDateTime toLocalDateTime(XMLGregorianCalendar xmlGregorianCalendar) {
-        return LocalDateTime.of(xmlGregorianCalendar.getYear(), xmlGregorianCalendar.getMonth(), xmlGregorianCalendar.getDay(), xmlGregorianCalendar.getHour(), xmlGregorianCalendar.getMinute(), xmlGregorianCalendar.getSecond());
-    }
-
     public LocalDateTime toStartOfDay() {
         return LocalDateTime.now().toLocalDate().atStartOfDay();
     }
@@ -36,7 +32,6 @@ public enum DateUtil {
         return LocalDateTime.now().plusDays(1).toLocalDate().atStartOfDay();
     }
 
-    // Метод для получения конца следующего дня (23:59:59.999999999)
     public LocalDateTime toEndOfNextDay() {
         return LocalDateTime.now().plusDays(1).toLocalDate().atTime(23, 59, 59);
     }

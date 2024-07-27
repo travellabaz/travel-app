@@ -23,3 +23,4 @@ token:
 url:
   base:
     soft-10: https://wp.soft10.az
+    telegram-bot: https://api.telegram.org/bot7019120725:AAHQlAMy_FBtM6iqBS56kQjv628Ph43TDoI/sendMessage

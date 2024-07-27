@@ -1,7 +1,6 @@
 package az.travellab.ms_travel_application.model.response;
 
 import az.travellab.ms_travel_application.model.dto.ClientDto;
-import az.travellab.ms_travel_application.model.dto.CountryDto;
 import az.travellab.ms_travel_application.model.dto.SalesComponentsDto;
 import az.travellab.ms_travel_application.model.dto.SalesPaymentsDto;
 import az.travellab.ms_travel_application.model.enums.ClientClass;
@@ -10,6 +9,7 @@ import az.travellab.ms_travel_application.model.enums.ServiceType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,8 +43,8 @@ public class SalesInfoResponse {
     private String note;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
-    private ClientDto clientDto;
-    private List<CountryDto> countries;
+    private ClientDto client;
+    private List<Long> cities;
     private List<SalesComponentsDto> components;
     private List<SalesPaymentsDto> payments;
 }

@@ -28,14 +28,13 @@ public final class QueryGeneratorUtil {
         final var count = "count";
         final var page = "page";
 
+        var stream = paramNames.stream()
+                .filter(paramName -> !(paramName.equals(page) || paramName.equals(count)));
+
         if (type.equals(FilterType.CLIENTS)) {
-            paramNames.stream()
-                    .filter(paramName -> !(paramName.equals(page) || paramName.equals(count)))
-                    .forEach(paramName -> query.append(ClientFieldsQueryExpressions.getExpression(paramName)));
+            stream.forEach(paramName -> query.append(ClientFieldsQueryExpressions.getExpression(paramName)));
         } else {
-            paramNames.stream()
-                    .filter(paramName -> !(paramName.equals(page) || paramName.equals(count)))
-                    .forEach(paramName -> query.append(SalesFieldsQueryExpressions.getExpression(paramName)));
+            stream.forEach(paramName -> query.append(SalesFieldsQueryExpressions.getExpression(paramName)));
         }
         return this;
     }
@@ -47,12 +46,16 @@ public final class QueryGeneratorUtil {
 
     public Query getTypedQuery(EntityManager entityManager, Map<String, String> paramKeyValue, Pageable pageable) {
         var nativeQuery = entityManager.createNativeQuery(query.toString());
+
         paramKeyValue.forEach((key, value) -> {
             if (value == null) return;
             if (key.equals("page") || key.equals("count")) return;
             if (fields.contains(key)) {
                 nativeQuery.setParameter(key, "%" + value.toUpperCase() + "%");
-            } else if (key.equals("isMarried") || key.equals("isParent")) {
+            } else if (
+                    key.equals("isMarried") || key.equals("isParent") || key.equals("isOfficial")
+                    || key.equals("hasClientRelationship") || key.equals("isEmployeeBonusPaid")
+            ) {
                 nativeQuery.setParameter(key, Boolean.valueOf(value));
             } else if (key.equals("cityId") || key.equals("countryId")) {
                 nativeQuery.setParameter(key, Long.valueOf(value));
@@ -69,5 +72,4 @@ public final class QueryGeneratorUtil {
         query.setFirstResult(pageable.getPageNumber() * pageable.getPageSize());
         query.setMaxResults(pageable.getPageSize());
     }
-
 }
