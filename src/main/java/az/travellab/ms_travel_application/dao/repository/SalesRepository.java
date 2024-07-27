@@ -13,7 +13,6 @@ import java.util.Optional;
 @Repository
 public interface SalesRepository extends CrudRepository<SalesEntity, Long> {
 
-//    @EntityGraph(value = "Sales.detail", type = EntityGraph.EntityGraphType.LOAD)
     Optional<SalesEntity> findByNumber(@Param("saleNumber") String saleNumber);
 
     @Modifying
@@ -28,14 +27,4 @@ public interface SalesRepository extends CrudRepository<SalesEntity, Long> {
                               AND scl.version_id = :versionId)
             """, nativeQuery = true)
     void deleteChangeLog(@Param("salesNumber") String salesNumber, @Param("versionId") Integer versionId);
-
-    @Query(value = """
-            SELECT *
-            FROM sales sales_table
-                     LEFT JOIN sales_change_log sales_change_log_table
-                               ON sales_change_log_table.sales_id = sales_table.id
-            WHERE sales_table.number = :number
-            ORDER BY sales_change_log_table.version_id;
-            """, nativeQuery = true)
-    SalesEntity getLastUpdatedVersion(@Param("number") String salesNumber);
 }

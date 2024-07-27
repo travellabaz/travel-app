@@ -8,14 +8,7 @@ import az.travellab.ms_travel_application.model.response.SalesInfoResponse;
 import az.travellab.ms_travel_application.service.SalesCalculationService;
 import az.travellab.ms_travel_application.service.SalesService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,22 +48,29 @@ public class SalesController {
         return salesService.getChangeLogs(salesNumber);
     }
 
-    //TODO adding update functionality of changelog
+    @PutMapping("changelogs")
+    @ResponseStatus(NO_CONTENT)
+    public void updateChangeLog(
+            @RequestParam Integer versionId,
+            @RequestBody SalesRequest request
+    ) {
+        salesService.updateChangeLog(versionId, request);
+    }
 
     @ResponseStatus(NO_CONTENT)
     @DeleteMapping("changelogs")
-    public void deleteChangeLogs(
+    public void deleteChangeLog(
             @RequestParam String salesNumber,
             @RequestParam Integer version
     ) {
-        salesService.deleteChangeLogs(salesNumber, version);
+        salesService.deleteChangeLog(salesNumber, version);
     }
 
     @PutMapping("confirm")
     @ResponseStatus(NO_CONTENT)
     public void confirm(
             @RequestParam String salesNumber,
-            @RequestParam(required = false) Integer version) {
+            @RequestParam Integer version) {
         salesService.confirm(salesNumber, version);
     }
 

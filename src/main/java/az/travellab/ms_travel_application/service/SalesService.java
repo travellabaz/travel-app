@@ -1,11 +1,12 @@
 package az.travellab.ms_travel_application.service;
 
+import az.travellab.ms_travel_application.client.TelegramBotClient;
 import az.travellab.ms_travel_application.dao.entity.ClientEntity;
 import az.travellab.ms_travel_application.dao.entity.SalesChangeLogEntity;
 import az.travellab.ms_travel_application.dao.entity.SalesEntity;
+import az.travellab.ms_travel_application.dao.repository.SalesChangeLogRepository;
 import az.travellab.ms_travel_application.dao.repository.SalesRepository;
 import az.travellab.ms_travel_application.exception.NotFoundException;
-import az.travellab.ms_travel_application.model.enums.Employee;
 import az.travellab.ms_travel_application.model.enums.FilterType;
 import az.travellab.ms_travel_application.model.request.sales.SalesRequest;
 import az.travellab.ms_travel_application.model.response.CommonPageableResponse;
@@ -24,20 +25,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static az.travellab.ms_travel_application.exception.ExceptionMessages.CLIENT_NOT_FOUND;
-import static az.travellab.ms_travel_application.exception.ExceptionMessages.SALES_NOT_FOUND;
+import static az.travellab.ms_travel_application.exception.ExceptionMessages.*;
 import static az.travellab.ms_travel_application.factory.PageableCommonMapper.PAGEABLE_COMMON_MAPPER;
 import static az.travellab.ms_travel_application.factory.SalesChangeLogMapper.SALES_CHANGE_LOG_MAPPER;
 import static az.travellab.ms_travel_application.factory.SalesMapper.SALES_MAPPER;
+import static az.travellab.ms_travel_application.factory.TelegramBotMapper.TELEGRAM_BOT_MAPPER;
+import static az.travellab.ms_travel_application.model.enums.Employee.getEmployeeNameByPhone;
 import static az.travellab.ms_travel_application.model.enums.SalesMessageQueries.GET_ALL_SALES;
 import static az.travellab.ms_travel_application.model.enums.SalesMessageQueries.GET_ALL_SALES_INFO_COUNT;
 import static az.travellab.ms_travel_application.model.enums.SalesStatus.PENDING_FOR_APPROVE;
+import static az.travellab.ms_travel_application.model.enums.TelegramNotificationType.SALE_UPDATE_NOTIFICATION;
 import static az.travellab.ms_travel_application.util.HttpContextUtil.HTTP_CONTEXT_UTIL;
 import static az.travellab.ms_travel_application.util.MapperUtil.MAPPER_UTIL;
 import static az.travellab.ms_travel_application.util.PageUtil.PAGE_UTIL;
 import static az.travellab.ms_travel_application.util.QueryGeneratorUtil.buildBaseQuery;
 import static az.travellab.ms_travel_application.util.SalesSearchResponseTransformerUtil.SALES_SEARCH_RESPONSE_TRANSFORMER_UTIL;
-import static az.travellab.ms_travel_application.util.SecureRandomUtil.generateUniqueNumber;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static org.springframework.data.domain.Pageable.unpaged;
 
@@ -48,20 +50,20 @@ public class SalesService {
     private final ClientService clientService;
     private final CityService cityService;
     private final SalesCalculationService calcService;
+    private final TelegramBotClient telegramBotClient;
     private final SalesRepository salesRepository;
+    private final SalesChangeLogRepository salesChangeLogRepository;
     @PersistenceContext
     private final EntityManager entityManager;
 
     public String create(SalesRequest salesRequest) {
-        var salesNumber = generateUniqueSalesNumber();
-
         var client = findClientByPhone(salesRequest.getClientNumber());
         var cities = cityService.getCitiesEntity(salesRequest.getCitiesIds());
 
-        var salesEntity = SALES_MAPPER.generateSalesEntity(salesNumber, client, cities, salesRequest);
+        var salesEntity = SALES_MAPPER.generateSalesEntity(client, cities, salesRequest);
         salesRepository.save(salesEntity);
 
-        return salesNumber;
+        return salesEntity.getNumber();
     }
 
     public void update(String user, SalesRequest salesRequest) {
@@ -71,33 +73,35 @@ public class SalesService {
         var newVersionId = getNextVersionId(changeLogEntities);
         changeLogEntities.add(
                 SALES_CHANGE_LOG_MAPPER.generateSalesChangeLogEntity(
-                        Employee.getEmployeeNameByPhone(user), salesEntity, newVersionId, salesRequest)
+                        getEmployeeNameByPhone(user), salesEntity, newVersionId, salesRequest)
         );
 
         salesEntity.setStatus(PENDING_FOR_APPROVE);
         salesRepository.save(salesEntity);
+
+        sendMessageAsync(salesEntity.getNumber(), salesEntity.getNote());
     }
 
     public SalesInfoResponse getInfo(String salesNumber) {
         var salesEntity = getSalesEntityByNumber(salesNumber);
-
-        var clientEntity = salesEntity.getClient();
-        var cityEntities = salesEntity.getCities();
-
-        return SALES_MAPPER.generateSalesInfoResponse(salesEntity, clientEntity, cityEntities);
+        return SALES_MAPPER.generateSalesInfoResponse(salesEntity);
     }
 
-    public void deleteChangeLogs(String salesNumber, Integer version) {
-        salesRepository.deleteChangeLog(salesNumber, version);
+    public void deleteChangeLog(String salesNumber, Integer versionId) {
+        salesRepository.deleteChangeLog(salesNumber, versionId);
+    }
+
+    public void updateChangeLog(Integer versionId, SalesRequest request) {
+        var changeLogEntity = salesChangeLogRepository.getChangeLogEntity(request.getNumber(), versionId)
+                .orElseThrow(() -> new NotFoundException(CHANGELOG_NOT_FOUND.getMessage().formatted(versionId)));
+
+        changeLogEntity.setRequest(MAPPER_UTIL.map(request));
+        salesChangeLogRepository.save(changeLogEntity);
     }
 
     public List<SalesChangeLogResponse> getChangeLogs(String salesNumber) {
         var salesEntity = getSalesEntityByNumber(salesNumber);
-
-        var client = salesEntity.getClient();
-        var cities = salesEntity.getCities();
-
-        return SALES_CHANGE_LOG_MAPPER.generateSalesChangeLogResponse(salesEntity.getChangelogs(), client, cities);
+        return SALES_CHANGE_LOG_MAPPER.generateSalesChangeLogResponse(salesEntity);
     }
 
     public void confirm(String salesNumber, Integer versionId) {
@@ -109,6 +113,8 @@ public class SalesService {
 
         var client = findClientByPhone(salesRequest.getClientNumber());
         var cities = cityService.getCitiesEntity(salesRequest.getCitiesIds());
+
+        //todo may be optimized for unused mapper calling and saving
 
         SALES_MAPPER.updateSalesEntity(versionId, client, cities, salesEntity, salesRequest);
 
@@ -127,6 +133,14 @@ public class SalesService {
         var newSalesResponseList = salesResponseList.join().stream().map(SALES_MAPPER::generateSalesInfoResponse).toList();
 
         return PAGEABLE_COMMON_MAPPER.buildPageableClientResponse(newSalesResponseList, salesResponseListCount.join());
+    }
+
+    private void sendMessageAsync(String salesNumber, String note) {
+        telegramBotClient.sendMessage(
+                TELEGRAM_BOT_MAPPER.generateRequest(
+                        SALE_UPDATE_NOTIFICATION, salesNumber, note
+                )
+        );
     }
 
     private ClientEntity findClientByPhone(String clientNumber) {
@@ -152,11 +166,6 @@ public class SalesService {
     private SalesEntity getSalesEntityByNumber(String salesNumber) {
         return salesRepository.findByNumber(salesNumber)
                 .orElseThrow(() -> new NotFoundException(SALES_NOT_FOUND.getMessage().formatted(salesNumber)));
-    }
-
-    private String generateUniqueSalesNumber() {
-        final var GENERATION_FORMAT = "TL/%08d-%d";
-        return generateUniqueNumber(GENERATION_FORMAT);
     }
 
     private List<SalesSearchResponse> getSalesList(Map<String, String> nameValueParams, Pageable pageable) {

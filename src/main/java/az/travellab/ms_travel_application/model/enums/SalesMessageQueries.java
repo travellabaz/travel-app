@@ -82,6 +82,7 @@ public enum SalesMessageQueries {
                   sales_table.trip_start_date,
                   sales_table.trip_end_date,
                   sales_table.employee_bonus,
+                  sales_table.is_employee_bonus_paid,
                   sales_table.profit,
                   sales_table.status,
                   sales_table.created_at,
@@ -100,7 +101,7 @@ public enum SalesMessageQueries {
               ) sales_subquery
             WHERE
               rn = 1
-              """);
+            """);
 
     private final String baseQuery;
 }

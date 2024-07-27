@@ -229,6 +229,9 @@ databaseChangeLog:
                   name: is_approved
                   type: boolean
               - column:
+                  name: note
+                  type: varchar2(255)
+              - column:
                   name: created_at
                   type: timestamp
                   defaultValue: now()

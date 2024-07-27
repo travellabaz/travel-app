@@ -15,7 +15,6 @@ import static az.travellab.ms_travel_application.util.CountryUtil.COUNTRY_UTIL;
 @RequiredArgsConstructor
 public class CountryService {
 
-    private final CityService cityService;
     private final CountryRepository countryRepository;
 
     public List<CountryEntity> getCountriesByMessage(String message) {
