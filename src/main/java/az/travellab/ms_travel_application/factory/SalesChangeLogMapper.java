@@ -1,7 +1,9 @@
 package az.travellab.ms_travel_application.factory;
 
+import az.travellab.ms_travel_application.dao.entity.ClientEntity;
 import az.travellab.ms_travel_application.dao.entity.SalesChangeLogEntity;
 import az.travellab.ms_travel_application.dao.entity.SalesEntity;
+import az.travellab.ms_travel_application.model.dto.ClientDto;
 import az.travellab.ms_travel_application.model.request.sales.SalesRequest;
 import az.travellab.ms_travel_application.model.response.SalesChangeLogResponse;
 import az.travellab.ms_travel_application.model.response.SalesInfoResponse;
@@ -36,15 +38,21 @@ public enum SalesChangeLogMapper {
                                 .username(log.getUsername())
                                 .version(log.getVersionId())
                                 .isApproved(log.getIsApproved())
-                                .request(generateSalesInfoResponse(log))
+                                .request(generateSalesInfoResponse(log, salesEntity.getClient()))
                                 .note(log.getNote())
                                 .date(log.getCreatedAt())
                                 .build()
                 )).sorted((o1, o2) -> o2.getVersion() - o1.getVersion()).toList();
     }
 
-    private SalesInfoResponse generateSalesInfoResponse(SalesChangeLogEntity entity) {
+    private SalesInfoResponse generateSalesInfoResponse(SalesChangeLogEntity entity, ClientEntity client) {
         var salesRequest = MAPPER_UTIL.map(entity.getRequest(), SalesRequest.class);
+
+        var clientDto = ClientDto.builder()
+                .name(client.getNameFrom())
+                .phone(client.getPhoneFrom())
+                .pin(client.getPin())
+                .build();
 
         return SalesInfoResponse.builder()
                 .number(salesRequest.getNumber())
@@ -59,6 +67,7 @@ public enum SalesChangeLogMapper {
                 .cancelReason(salesRequest.getCancelReason())
                 .note(salesRequest.getNote())
                 .createdAt(salesRequest.getCreatedAt())
+                .client(clientDto)
                 .components(salesRequest.getComponents())
                 .payments(salesRequest.getPayments())
                 .cities(salesRequest.getCitiesIds())

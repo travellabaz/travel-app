@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum TelegramNotificationType {
-    SALE_UPDATE_NOTIFICATION("13", "2195775797_13", "UPDATED: \nNumber: %s \nNote: %s"),
+    SALE_UPDATE_NOTIFICATION("13", "-1002195775797", "UPDATE: \nNumber: %s \nNote: %s"),
     LAST_PAYMENT_DATE_NOTIFICATION(null, null, null),
     INITIAL_PAYMENT_DATE_NOTIFICATION(null, null, null),
     VISA_NOTIFICATION(null, null, null);
