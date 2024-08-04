@@ -28,6 +28,7 @@ public class SalesInfoResponse {
     @JsonProperty("class")
     private ClientClass clientClass;
     private String salesperson;
+    private String salespersonNumber;
     private Boolean hasClientRelationship;
     private BigDecimal purchasedAmount;
     private BigDecimal soldAmount;

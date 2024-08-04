@@ -60,6 +60,7 @@ public enum SalesChangeLogMapper {
                 .type(salesRequest.getType())
                 .clientClass(salesRequest.getClientClass())
                 .salesperson(getEmployeeNameByPhone(salesRequest.getSalespersonNumber()))
+                .salespersonNumber(salesRequest.getSalespersonNumber())
                 .hasClientRelationship(salesRequest.getHasClientRelationship())
                 .tripStartDate(salesRequest.getTripStartDate())
                 .tripEndDate(salesRequest.getTripEndDate())
