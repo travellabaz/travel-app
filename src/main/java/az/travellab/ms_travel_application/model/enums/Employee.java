@@ -38,4 +38,11 @@ public enum Employee {
                 .findFirst()
                 .get().name;
     }
+
+    public static String getEmployeePhoneByName(String name) {
+        return stream(Employee.values())
+                .filter(employee -> employee.getName().equals(name))
+                .findFirst()
+                .get().phone;
+    }
 }

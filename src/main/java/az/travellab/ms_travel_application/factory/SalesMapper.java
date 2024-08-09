@@ -116,6 +116,7 @@ public enum SalesMapper {
                 .pin(filterResponse.getClientPin())
                 .build();
 
+        response.setSalespersonNumber(Employee.getEmployeePhoneByName(response.getSalesperson()));
         return response.setClient(client);
     }
 
